@@ -20,12 +20,12 @@
 
 <body>
 <div id="app">
-  <header class="l-header"> 
+  <header class="l-header p-headerList"> 
 
     <div class="p-header">
         <div class="p-header__logo">
           <a href class="p-topLink">
-            <img src="./images/logo.png" style="width: 30px;" alt class="p-topLink__img" />
+            <img src="./images/logo.png" alt class="p-topLink__img" />
           </a>
         </div>
         <div class="p-header__search">
@@ -59,17 +59,17 @@
     </div>
 
     <div class="p-sort">
-      <p class="p-categorySearch"><i class="far fa-list-alt"></i>カテゴリーから探す</p>
+      <p class="p-categorySearch"><i class="far fa-list-alt p-categorySearch__icon"></i>カテゴリーから探す</p>
       <div class="p-category">
         <ul class="p-category__items">
           <li class="p-categoryItem">カテゴリー</li>
-          <li class="p-categoryItem"><a href="#" class="p-categoryLink">勉強</a></li>
-          <li class="p-categoryItem"><a href="#" class="p-categoryLink">ダイエット</a></li>
-          <li class="p-categoryItem"><a href="#" class="p-categoryLink">筋トレ</a></li>
-          <li class="p-categoryItem"><a href="#" class="p-categoryLink">英会話</a></li>
-          <li class="p-categoryItem"><a href="#" class="p-categoryLink">ギター</a></li>
-          <li class="p-categoryItem"><a href="#" class="p-categoryLink">ビジネス</a></li>
-          <li class="p-categoryItem"><a href="#" class="p-categoryLink">弁護士</a></li>
+          <li class="p-categoryItem"><a href="#" class="p-categoryItem__link">勉強</a></li>
+          <li class="p-categoryItem"><a href="#" class="p-categoryItem__link">ダイエット</a></li>
+          <li class="p-categoryItem"><a href="#" class="p-categoryItem__link">筋トレ</a></li>
+          <li class="p-categoryItem"><a href="#" class="p-categoryItem__link">英会話</a></li>
+          <li class="p-categoryItem"><a href="#" class="p-categoryItem__link">ギター</a></li>
+          <li class="p-categoryItem"><a href="#" class="p-categoryItem__link">ビジネス</a></li>
+          <li class="p-categoryItem"><a href="#" class="p-categoryItem__link">弁護士</a></li>
         </ul>
       </div>
 
@@ -86,30 +86,35 @@
 
   </header>
 
-  <main class="l-main">
+  <main class="l-stepList">
 <!--ーーーーーーーーーーーーーーーーーー STEP一覧画面表示 ーーーーーーーーーーーーーーーーーー--> 
-    <div class="l-bg p-stepList"> 
+  <div class="l-bg p-stepList"> 
 
   
     <div class="p-stepList__container">
     @for($i = 0; $i < 9; $i++)
-      <div class="p-step">
-        <img src="./images/rika.png" alt="" class="p-step__img">
+      <div class="c-step p-step">
+        <img src="./images/rika.png" alt="" class="c-step__img">
         
-        <div class="p-itemCover">
-          <p class="p-itemCover__outline">
+        <div class="c-itemCover">
+          <p class="c-itemCover__outline">
             気温や湿度を入力し、最も目覚めの良いアラームを自動で選択し…
           </p>
-          <a href="#" class="p-itemCover__link">詳細を見る<i class="fas fa-search-plus p-itemCover__icon"></i></a>
+          <a href="#" class="c-itemCover__link">詳細を見る<i class="fas fa-search-plus c-coverIcon"></i></a>
         </div>
           
-        <div class="p-step__wrap">
-          <div class="p-faceicon">
-            <img src="./images/icon.png" style="width: 50px;" alt="" class="p-faceicon__img">
+        <div class="c-step__wrap">
+          <div class="c-faceicon">
+            <img src="./images/icon.png" alt="" class="c-faceicon__img">
            </div>
-          <span class="p-stepTitle">サルでる分かる英語勉強法！</span>
-          <span class="p-stepCategory c-category">英会話</span>
-          <i class="fas fa-star p-stepFav c-star"></i><span class="p-stepTotal">48</span>
+          <span class="c-stepTitle">サルでる分かる英語勉強法！</span>
+          <div class="c-indexContainer">
+            <span class="c-indexContainer__category c-category">英会話</span>
+            <div class="c-favContainer">
+              <i class="fas fa-star c-favContainer__icon c-star"></i>
+              <span class="c-favContainer__total">48</span>
+            </div>
+          </div>
         </div>
       </div>
     @endfor
@@ -118,38 +123,38 @@
 
 <!--ーーーーーーーーーーーーーーーーーー ページネーション ーーーーーーーーーーーーーーーーーー-->
   <ul class="c-pagenation p-stepListPage">
-    <li class="c-pagenation__item">
+    <li class="c-pagenation__item p-stepListPage__item">
       <a class="c-pageLink" href="#" ><</a>
     </li>
-    <li class="c-pagenation__item">
+    <li class="c-pagenation__item p-stepListPage__item">
       <a class="c-pageLink" href="#" >1</a>
     </li>
-    <li class="c-pagenation__item">
+    <li class="c-pagenation__item p-stepListPage__item">
       <a class="c-pageLink" href="#" >2</a>
     </li>
-    <li class="c-pagenation__item">
+    <li class="c-pagenation__item p-stepListPage__item">
       <a class="c-pageLink" href="#" >3</a>
     </li>
-    <li class="c-pagenation__item">
+    <li class="c-pagenation__item p-stepListPage__item">
       <a class="c-pageLink" href="#" >4</a>
     </li>
-    <li class="c-pagenation__item">
+    <li class="c-pagenation__item p-stepListPage__item">
       <a class="c-pageLink" href="#" >5</a>
     </li>
-    <li class="c-pagenation__item">
+    <li class="c-pagenation__item p-stepListPage__item">
       <a class="c-pageLink" href="#" >></a>
     </li>
   </ul>
 
-    </div>
+</div>
   </main>
 
 
   <div class="l-footer">
-      <ul class="p-footerMenu">
-        <li class="p-footerMenu__list">特定商取引法</li>
-        <li class="p-footerMenu__list">プライバシーポリシー</li>
-        <li class="p-footerMenu__list">Step</li>
+      <ul class="l-footerMenu">
+        <li class="l-footerMenu__list">特定商取引法</li>
+        <li class="l-footerMenu__list">プライバシーポリシー</li>
+        <li class="l-footerMenu__list">Step</li>
       </ul>
   </div>
 </div>

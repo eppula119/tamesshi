@@ -11,17 +11,29 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    @include mq('sp') {
+      width: 20%;
+    }
     .p-topLink {
       
       &__img {
         width: 70%;
         margin-left: $space_3l;
+        @include mq('sp') {
+          margin-left: $space_l;
+        }
       }
     }
   }
   &__search {
     width: 30%;
     height: 35%;
+    @include mq('tab') {
+      width: 50%;
+    }
+    @include mq('sp') {
+      width: 60%;
+    }
     .p-search {
       height: 100%;
       width: 100%;
@@ -37,6 +49,9 @@
         padding: $space_m;
         font-size: $font-size_s;
         letter-spacing: 2px;
+        @include mq('sp') {
+          width: 70%;
+        }
 
       }
       &__btn {
@@ -57,19 +72,72 @@
       width: 100px;
       height: 30px;
       border-radius: 8px;
+      @include mq('tab') {
+        display: none;
+      }
     }
     .p-headerMenu {
-      display: none;
+      position: absolute;
+      background: $color_light100;
+      font-size: $font-size_s;
+      padding: $space_m;
+      box-sizing: border-box;
+      border-radius: 8px;
+      z-index: 1;
+      @include mq('tab') {
+        top: 0px;
+        width: 50%;
+        right: -50%;
+        padding-top: $space_8l;
+        box-sizing: border-box;
+        text-align: center;
+        font-size: $font-size_l;
+        height: 100%;
+        position: fixed;
+        transition: all .5s;
+      }
+      @include mq('sp') {
+        top: 0px;
+        width: 100%;
+        right: -100%;
+        padding-top: $space_8l;
+        box-sizing: border-box;
+        text-align: center;
+        font-size: $font-size_l;
+        height: 100%;
+        position: fixed;
+        transition: all .5s;
+      }
       &__list {
-
         .p-menuItem {
-
+          margin-bottom: $space_m;
+          @include mq('tab') {
+            padding: $space_xl 0;
+            box-sizing: border-box;
+          }
           form {
             .p-logout {
-
+              background-color: $color_light100;
+              border: none;
+              box-shadow: none;
             }
           }
         }
+        .p-menuItem:last-child {
+          margin-bottom: 0;
+        }
+      }
+    }
+    .active {
+      display: block;
+      @include mq('tab') {
+        transform: translatex(-100%);
+        -webkit-transform: translatex(-100%);
+        
+      }
+      @include mq('sp') {
+        transform: translatex(-100%);
+        -webkit-transform: translatex(-100%);
       }
     }
   }
@@ -78,8 +146,58 @@
 
   .p-headerMenuTrigger {
     display: none;
+    @include mq('tab') {
+      display: inline-block;
+    }
+    @include mq('sp') {
+      right: $space_l;
+    }
+    transition: all .4s;
+    -webkit-transition: all .4s;
+    box-sizing: border-box;
+    position: absolute;
+    right: $space_2l;
+    top: $space_3l;
+    width: 40px;
+    height: 32px;
+    z-index: 3;
     &__border {
-
+      display: inline-block;
+      transition: all .4s;
+      -webkit-transition: all .4s;
+      box-sizing: border-box;
+      position: absolute;
+      left: 0;
+      width: 100%;
+      height: 4px;
+      background-color: $color_light100;
+      border-radius: 4px;
+      &:nth-of-type(1) {
+        top: 0;
+        background-color: $color_dark075;
+      }
+      &:nth-of-type(2) {
+        top: 14px;
+        background-color: $color_dark075;
+      }
+      &:nth-of-type(3) {
+        bottom: 0;
+        background-color: $color_dark075;
+      }
+    }
+    .active {
+      &:nth-of-type(1){
+          transform: translateY(12px) rotate(-45deg);
+          background-color: $color_dark050;
+      }
+      &:nth-of-type(2) {
+          opacity: 0;
+      }
+      &:nth-of-type(3) {
+          transform: translateY(-15px) rotate(45deg);
+          background-color: $color_dark050;
+      }
     }
   }
+
 }

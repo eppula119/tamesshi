@@ -4,12 +4,19 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  &__delete, &__update {
-    width: 40%;
-    border-radius: 6px;
-  }
-  &__delete {
+  &__delete, &__back, &__next {
     background-color: $color_dark075;
     color: $color_light100;
+     display: inline-block;
+    width: 40%;
+    border-radius: 6px;
+    @include mq() {
+      margin-top: $space_l;
+      padding: 0;
+      height: 40px;
+    }
   }
+}
+.p-linkMypage {
+  border-radius: 6px;
 }

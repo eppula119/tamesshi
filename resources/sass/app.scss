@@ -30,6 +30,8 @@
 @import "object/component/_form";
 @import "object/component/_button";
 @import "object/component/_pagenation";
+@import "object/component/_step";
+@import "object/component/_modal";
 
 // ====================================================
 // Project
@@ -41,6 +43,13 @@
 @import "object/project/_top";
 @import "object/project/_new_step";
 @import "object/project/_edit_step";
+@import "object/project/_child_new";
+@import "object/project/_profile";
+@import "object/project/_step_list";
+@import "object/project/_modal";
+@import "object/project/_mypage";
+@import "object/project/_step_detail";
+@import "object/project/_child_detail";
 
 // Bootstrap
 @import '~bootstrap/scss/bootstrap';

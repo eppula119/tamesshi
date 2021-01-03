@@ -7,6 +7,9 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use Illuminate\Http\Request;
+use App\Rules\AlphaNumHalf;
+use Illuminate\Support\Facades\Log; //ログを取る
 
 class RegisterController extends Controller
 {
@@ -49,10 +52,11 @@ class RegisterController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => ['required', 'string', 'min:8', 'confirmed'],
+            
+            'email' => ['required', 'email', 'unique:users'],
+            'password' => ['required', new AlphaNumHalf, 'min:8', 'max:32','confirmed'],
         ]);
+        Log::debug('バリデーション完了');
     }
 
     /**
@@ -64,9 +68,15 @@ class RegisterController extends Controller
     protected function create(array $data)
     {
         return User::create([
-            'name' => $data['name'],
+            // 'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
         ]);
+    }
+
+    // ★ メソッド追加
+    protected function registered(Request $request, $user)
+    {Log::debug('ユーザー作成');
+        return $user;
     }
 }

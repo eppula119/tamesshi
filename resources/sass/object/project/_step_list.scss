@@ -1,0 +1,176 @@
+// ＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝　絞り込み部分　＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
+.p-headerList {
+  height: calc( #{$height_s} + #{$height_ss} );
+  .p-sort {
+    margin-top: -$space_l;
+    padding: 0 $space_3l;
+    box-sizing: border-box;
+    .p-categorySearch {
+      display: inline-block;
+      margin-top: $space_xl;
+      font-size: $font-size_s;
+      margin-right: $space_xl;
+      height: 30px;
+      cursor: pointer;
+      &__icon {
+        margin-right: $space_s;
+      }
+      @include mq() {
+        display: none;
+      }
+    }
+    .p-category {
+      display: none;
+      position: absolute;
+      top: $space_10l;
+      left: $space_5l;
+      width: 20%;
+      background: $color_light100;
+      border-radius: 5px;
+      padding: $space_m;
+      box-sizing: border-box;
+      z-index: 1;
+      @include mq() {
+        display: block;
+        width: 100%;
+        padding: 0;
+        box-sizing: border-box;
+        top: 140px;
+        left: 0px;
+      }
+      &__items {
+        text-align: center;
+        @include mq() {
+          overflow-x: auto;
+          white-space: nowrap;
+          margin-bottom: 0px;
+        }
+      .p-categoryItem {
+        width: 100%;
+        margin-bottom: $space_m;
+        font-size: $font-size_s;
+        @include mq() {
+          display: inline-block;
+          width: 25%;
+          background: $color_dark050;
+          padding: $space_xl $space_s;
+          box-sizing: border-box;
+          font-size: $font-size_default;
+          text-align: center;
+          white-space: normal;
+          margin-bottom: 0px;
+          margin: 0px $space_s;
+          border-top-left-radius: 10px;
+          border-top-right-radius: 10px;
+        }
+        &__link {
+          color: $color_dark100;
+          display: none;
+          @include mq() {
+            color: $color_light100;
+          }
+        }
+      }
+      .p-categoryItem:first-child {
+        @include mq() {
+          display: none;
+        }
+      }
+      .p-categoryItem:last-child {
+        margin-bottom: 0;
+      }
+      .p-categoryItem:nth-child(n+2) {
+        cursor: pointer;
+      }
+    }
+    &--active {
+      display: block;
+    }
+    }
+    .p-favSort {
+      display: inline-block;
+      font-size: $font-size_s;
+      @include mq() {
+        margin-top: $space_l;
+        width: 100%;
+      }
+      .p-sortForm {
+
+        &__select {
+          box-sizing: border-box;
+          font-size: $font-size_xs;
+          height: 30px;
+          padding: 0 $space_m;
+          border-radius: 6px;
+          border: solid 1px $color_dark025;
+          background-color: $color_light100;
+          @include mq() {
+            width: 80%;
+            font-size: $font-size_default;
+            height: 25px;
+          }
+          .p-selectItem {
+
+          }
+        }
+        .p-searchBtn {
+          font-size: $font-size_xs;
+          height: 30px;
+          background-color: $color_light100;
+          border: solid 1px $color_dark025;
+          border-radius: 6px;
+          @include mq() {
+            width: 18%;
+            font-size: $font-size_default;
+            height: 25px;
+          }
+        }
+      }
+    }
+    
+  }
+  .p-sort:before {
+    content: '';
+    position: absolute;
+    left: 50%;
+    display: inline-block;
+    width: calc(100% - 60px);
+    height: 1px;
+    -webkit-transform: translateX(-50%);
+    transform: translateX(-50%);
+    background-color: $color_dark025;
+ }
+}
+
+// ＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝　STEP一覧部分　＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
+.p-stepList {
+  width: 100%;
+  &__container {
+    position: relative;
+    top: calc( #{$height_s} + #{$height_ss} );
+    right: 0;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    width: 90%;
+    margin: 0 auto;
+    .p-step {
+      @include mq('tab') {
+        width: 46%;
+      }
+      @include mq() {
+        width: 90%;
+        margin:  0 auto;
+        margin-bottom: $space_xl;
+      }
+    }
+  }
+  .p-stepListPage {
+    margin-top: calc( #{ $space_10l } * 2 );
+    &__item {
+      border: none;
+      background-color: $color_light100;
+      border-radius: 3px;
+    }
+  }
+}
