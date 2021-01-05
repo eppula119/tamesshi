@@ -6,7 +6,7 @@
 
   <title>@yield('title', 'ログイン')</title>
   <!-- Scripts -->
-   <script src="{{ asset('js/app.js') }}" defer></script>
+   <script src="{{ mix('js/app.js') }}" defer></script>
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <!-- CSRF Token -->
   
@@ -16,7 +16,7 @@
 
   <script src="https://kit.fontawesome.com/39ab84bfc8.js" crossorigin="anonymous"></script>
   <link href="https://fonts.googleapis.com/css?family=Noto+Serif+JP:400,700&display=swap" rel="stylesheet">
-  <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+  <link href="{{ mix('css/app.css') }}" rel="stylesheet">
   
 </head>
 
