@@ -70,14 +70,14 @@
           class="p-registerStep__category"
           v-model="category_id"
         >
-          <option value="1" class="p-selectCategory">勉強</option>
-          <option value="2" class="p-selectCategory">ダイエット</option>
-          <option value="3" class="p-selectCategory">筋トレ</option>
-          <option value="4" class="p-selectCategory">英会話</option>
-          <option value="5" class="p-selectCategory">ギター</option>
-          <option value="6" class="p-selectCategory">ビジネス</option>
-          <option value="7" class="p-selectCategory">弁護士</option>
-          <option value="8" class="p-selectCategory">その他</option>
+          <option
+            v-for="(category, i) in this.categorys"
+            :key="i"
+            :value="category.id"
+            class="p-selectCategory"
+          >
+            {{ category.name }}
+          </option>
         </select>
 
         <span class="c-invalid p-categoryMsg" role="alert" v-if="errors">
@@ -131,6 +131,7 @@ export default {
         category: [],
         time: [],
       },
+      categorys: {},
     };
   },
   computed: {
@@ -244,6 +245,14 @@ export default {
       this.$router.push(`/register_child/step=${response.data.step_id}/child`);
     },
     fetchStep() {
+      // カテゴリー情報取得
+      var self = this;
+      var url = "/api/category/search";
+      axios.post(url).then(function (response) {
+        // カテゴリーモデルからデータを全て取得
+        self.categorys = response.data["category"];
+      });
+
       if (this.steps.length !== 0) {
         console.log("編集画面表示中");
         // reader.readAsDataURL(event.target.files[0]);

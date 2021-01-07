@@ -215,8 +215,12 @@ class StepController extends Controller
 
     public function indexCategory() // 各カテゴリー取得
     {
-        $allCategory = Category::get(); //　全カテゴリーデータ取得
+			\Debugbar::info("カテゴリー全て取得");
+				
+				$allCategory = Category::get(); //　全カテゴリーデータ取得
+				\Debugbar::info($allCategory);
 
+				\Debugbar::info("category => ドルallCategoryに変換");
         $categorys = array('category' => $allCategory);
         return $categorys;
     }
@@ -263,6 +267,8 @@ class StepController extends Controller
 				\Debugbar::info("タイトル完了");
 				$step->content = $request->content;
 				\Debugbar::info("内容完了");
+				\Debugbar::info("カテゴリーリクエストの中身");
+				\Debugbar::info($request->category);
 				$step->category_id = $request->category;
 				\Debugbar::info("カテゴリー完了");
 				$step->time = $request->time;

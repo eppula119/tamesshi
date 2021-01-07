@@ -4191,7 +4191,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         content: [],
         category: [],
         time: []
-      }
+      },
+      categorys: {}
     };
   },
   computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_2__["mapState"])({
@@ -4348,6 +4349,14 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       }))();
     },
     fetchStep: function fetchStep() {
+      // カテゴリー情報取得
+      var self = this;
+      var url = "/api/category/search";
+      axios.post(url).then(function (response) {
+        // カテゴリーモデルからデータを全て取得
+        self.categorys = response.data["category"];
+      });
+
       if (this.steps.length !== 0) {
         console.log("編集画面表示中"); // reader.readAsDataURL(event.target.files[0]);
         // this.image = event.target.files[0];
@@ -9105,55 +9114,18 @@ var render = function() {
                 }
               }
             },
-            [
-              _c(
+            _vm._l(this.categorys, function(category, i) {
+              return _c(
                 "option",
-                { staticClass: "p-selectCategory", attrs: { value: "1" } },
-                [_vm._v("勉強")]
-              ),
-              _vm._v(" "),
-              _c(
-                "option",
-                { staticClass: "p-selectCategory", attrs: { value: "2" } },
-                [_vm._v("ダイエット")]
-              ),
-              _vm._v(" "),
-              _c(
-                "option",
-                { staticClass: "p-selectCategory", attrs: { value: "3" } },
-                [_vm._v("筋トレ")]
-              ),
-              _vm._v(" "),
-              _c(
-                "option",
-                { staticClass: "p-selectCategory", attrs: { value: "4" } },
-                [_vm._v("英会話")]
-              ),
-              _vm._v(" "),
-              _c(
-                "option",
-                { staticClass: "p-selectCategory", attrs: { value: "5" } },
-                [_vm._v("ギター")]
-              ),
-              _vm._v(" "),
-              _c(
-                "option",
-                { staticClass: "p-selectCategory", attrs: { value: "6" } },
-                [_vm._v("ビジネス")]
-              ),
-              _vm._v(" "),
-              _c(
-                "option",
-                { staticClass: "p-selectCategory", attrs: { value: "7" } },
-                [_vm._v("弁護士")]
-              ),
-              _vm._v(" "),
-              _c(
-                "option",
-                { staticClass: "p-selectCategory", attrs: { value: "8" } },
-                [_vm._v("その他")]
+                {
+                  key: i,
+                  staticClass: "p-selectCategory",
+                  domProps: { value: category.id }
+                },
+                [_vm._v("\n          " + _vm._s(category.name) + "\n        ")]
               )
-            ]
+            }),
+            0
           ),
           _vm._v(" "),
           _vm.errors
