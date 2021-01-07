@@ -224,9 +224,11 @@ class StepController extends Controller
     public function registerStep(Request $request)
     {
         Log::debug('バリデーション開始2');
-        
+        \Debugbar::info("バリデーション開始レジスター");
         Log::debug('リクエスト画像');
-        Log::debug(print_r($request['image'] , true));
+				Log::debug(print_r($request['image'] , true));
+				\Debugbar::info("リクエストの中身");
+				\Debugbar::info($request);
         
         // バリデーション
         $request->validate([
@@ -240,24 +242,33 @@ class StepController extends Controller
             $rules = ['image' => ['file', new MegaBytes(1)]];
             $this->validate($request, $rules);
         }
-         Log::debug('バリデーションok');
-
-
-        $step = new Step();
-        $user_id = Auth::id();
+				 Log::debug('バリデーションok');
+				 
+				\Debugbar::info("stepをインスタンス化");
+				$step = new Step();
+				\Debugbar::info("stepをインスタンス化成功");
+				\Debugbar::info("ログイン中のユーザーIDを取得開始");
+				$user_id = Auth::id();
+				\Debugbar::info("ログイン中のユーザーIDを取得成功！");
         $file_name = "";
 
         if(!empty($request['image'])) {
        		$image = $request['image'];
 					$path = Storage::disk('s3')->put('/', $image, 'public');
 					$step['image'] = Storage::disk('s3')->url($path);
-        }
+				}
+				\Debugbar::info("DBへ保存");
 
-        $step->title = $request->title;
-        $step->content = $request->content;
-        $step->category_id = $request->category;
-        $step->time = $request->time;
-        $step->user_id = $user_id;
+				$step->title = $request->title;
+				\Debugbar::info("タイトル完了");
+				$step->content = $request->content;
+				\Debugbar::info("内容完了");
+				$step->category_id = $request->category;
+				\Debugbar::info("カテゴリー完了");
+				$step->time = $request->time;
+				\Debugbar::info("時間完了");
+				$step->user_id = $user_id;
+					\Debugbar::info("ユーザーID完了");
         $step->save();
         return response()->json(['step_id' => $step->id, 'state' => 'NY'], 201);
         
@@ -302,6 +313,7 @@ class StepController extends Controller
 
     public function updateStep(Request $request, $id)
     {   
+
         $step = Step::find($id);
         Log::debug('STEP画像');
         Log::debug(print_r($step['image'] , true));
