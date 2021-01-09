@@ -150,7 +150,6 @@ export default {
       const response = await axios.post(`/api/challenge/${this.step.id}`);
       if (response.status !== OK) {
         this.$store.commit("error/setCode", response.status);
-        return false;
       }
       this.$router.push(`/step_list/step=${this.step.id}/child`);
     },
@@ -166,7 +165,7 @@ export default {
         "あなたに合った学習方法が見つかるかも？「STEP」" +
         "%20%23STEP" +
         "&url=" +
-        "http://steps/twitter-share";
+        "https://gentle-basin-84705.herokuapp.com/top";
       //シェア用の画面へ移行
       location.href = shareURL;
     },

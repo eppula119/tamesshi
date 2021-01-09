@@ -12,7 +12,7 @@
             class="c-form__input is-invalid"
             　required
             autocomplete="current-password"
-            placeholder="※7文字以上半角英数字"
+            placeholder="※8文字以上32文字以下の半角英数字"
             v-model="resetForm.password"
           />
 
@@ -32,14 +32,15 @@
             class="c-form__input is-invalid"
             　required
             autocomplete="current-password"
-            placeholder="※7文字以上半角英数字"
+            placeholder="※8文字以上32文字以下の半角英数字"
             v-model="resetForm.password_confirmation"
           />
-          <span class="c-invalid" role="alert">
-            <strong>※パスワードが違います</strong>
-          </span>
 
-          <input type="submit" class="c-btnAuth c-btn" value="パスワードリセット" />
+          <input
+            type="submit"
+            class="c-btnAuth c-btn"
+            value="パスワードリセット"
+          />
         </form>
       </div>
     </div>
@@ -55,8 +56,8 @@ export default {
       resetForm: {
         password: "",
         password_confirmation: "",
-        token: ""
-      }
+        token: "",
+      },
     };
   },
   computed: {
@@ -67,7 +68,7 @@ export default {
     // authストアのresetErrorMessages
     resetErrors() {
       return this.$store.state.auth.resetErrorMessages;
-    }
+    },
   },
   methods: {
     async reset() {
@@ -78,14 +79,14 @@ export default {
         // メッセージストアで表示
         this.$store.commit("message/setContent", {
           content: "パスワードをリセットしました。",
-          timeout: 10000
+          timeout: 10000,
         });
         // AUTHストアのエラーメッセージをクリア
         this.clearError();
         // フォームをクリア
         this.clearForm();
         // トップページに移動
-        this.$router.push("/");
+        this.$router.push("/step_list");
       }
     },
     clearError() {
@@ -97,7 +98,7 @@ export default {
       this.resetForm.password = "";
       this.resetForm.password_confirmation = "";
       this.resetForm.token = "";
-    }
+    },
   },
   created() {
     // クッキーからリセットトークンを取得
@@ -113,6 +114,6 @@ export default {
     if (token) {
       Cookies.remove("RESETTOKEN");
     }
-  }
+  },
 };
 </script>

@@ -2330,7 +2330,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
             switch (_context3.prev = _context3.next) {
               case 0:
                 //シェアする画面を設定
-                shareURL = "https://twitter.com/intent/tweet?text=" + "あなたに合った学習方法が見つかるかも？「STEP」" + "%20%23STEP" + "&url=" + "http://steps/twitter-share"; //シェア用の画面へ移行
+                shareURL = "https://twitter.com/intent/tweet?text=" + "あなたに合った学習方法が見つかるかも？「STEP」" + "%20%23STEP" + "&url=" + "https://gentle-basin-84705.herokuapp.com/top"; //シェア用の画面へ移行
 
                 location.href = shareURL;
 
@@ -4469,6 +4469,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -4518,7 +4519,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                   _this.clearForm(); // トップページに移動
 
 
-                  _this.$router.push("/");
+                  _this.$router.push("/step_list");
                 }
 
               case 3:
@@ -4875,19 +4876,13 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
               case 2:
                 response = _context4.sent;
 
-                if (!(response.status !== _util__WEBPACK_IMPORTED_MODULE_1__["OK"])) {
-                  _context4.next = 6;
-                  break;
+                if (response.status !== _util__WEBPACK_IMPORTED_MODULE_1__["OK"]) {
+                  _this4.$store.commit("error/setCode", response.status);
                 }
 
-                _this4.$store.commit("error/setCode", response.status);
-
-                return _context4.abrupt("return", false);
-
-              case 6:
                 _this4.$router.push("/step_list/step=".concat(_this4.step.id, "/child"));
 
-              case 7:
+              case 5:
               case "end":
                 return _context4.stop();
             }
@@ -4923,7 +4918,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
             switch (_context6.prev = _context6.next) {
               case 0:
                 //シェアする画面を設定
-                shareURL = "https://twitter.com/intent/tweet?text=" + "あなたに合った学習方法が見つかるかも？「STEP」" + "%20%23STEP" + "&url=" + "http://steps/twitter-share"; //シェア用の画面へ移行
+                shareURL = "https://twitter.com/intent/tweet?text=" + "あなたに合った学習方法が見つかるかも？「STEP」" + "%20%23STEP" + "&url=" + "https://gentle-basin-84705.herokuapp.com/top"; //シェア用の画面へ移行
 
                 location.href = shareURL;
 
@@ -7470,7 +7465,7 @@ var render = function() {
                         "li",
                         { staticClass: "p-menuItem" },
                         [
-                          _c("RouterLink", { attrs: { to: "/" } }, [
+                          _c("RouterLink", { attrs: { to: "/top" } }, [
                             _vm._v("TOPページ")
                           ])
                         ],
@@ -9278,7 +9273,7 @@ var render = function() {
                 name: "password",
                 required: "",
                 autocomplete: "current-password",
-                placeholder: "※7文字以上半角英数字"
+                placeholder: "※8文字以上32文字以下の半角英数字"
               },
               domProps: { value: _vm.resetForm.password },
               on: {
@@ -9338,7 +9333,7 @@ var render = function() {
                 name: "password",
                 required: "",
                 autocomplete: "current-password",
-                placeholder: "※7文字以上半角英数字"
+                placeholder: "※8文字以上32文字以下の半角英数字"
               },
               domProps: { value: _vm.resetForm.password_confirmation },
               on: {
@@ -9355,8 +9350,6 @@ var render = function() {
               }
             }),
             _vm._v(" "),
-            _vm._m(0),
-            _vm._v(" "),
             _c("input", {
               staticClass: "c-btnAuth c-btn",
               attrs: { type: "submit", value: "パスワードリセット" }
@@ -9367,16 +9360,7 @@ var render = function() {
     ])
   ])
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("span", { staticClass: "c-invalid", attrs: { role: "alert" } }, [
-      _c("strong", [_vm._v("※パスワードが違います")])
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 
@@ -28031,18 +28015,27 @@ var routes = [{
     }
   }
 }, {
-  path: '/step_list/:id',
-  // STEP詳細画面へのパス
-  component: _components_StepDetail_vue__WEBPACK_IMPORTED_MODULE_9__["default"],
-  props: true
-}, {
   path: '/step_list/step=:step_id/child',
   // 子STEP詳細画面へのパス
   component: _components_ChildStep_vue__WEBPACK_IMPORTED_MODULE_10__["default"],
-  props: true
+  props: true,
+  beforeEnter: function beforeEnter(to, from, next) {
+    if (_store__WEBPACK_IMPORTED_MODULE_13__["default"].getters["auth/check"]) {
+      next();
+    } else {
+      next('/login'); // ログイン済みで無い場合は、ログイン画面へリダイレクト
+    }
+  }
 }, {
   path: '/mypage',
-  component: _components_Mypage_vue__WEBPACK_IMPORTED_MODULE_8__["default"]
+  component: _components_Mypage_vue__WEBPACK_IMPORTED_MODULE_8__["default"],
+  beforeEnter: function beforeEnter(to, from, next) {
+    if (_store__WEBPACK_IMPORTED_MODULE_13__["default"].getters["auth/check"]) {
+      next();
+    } else {
+      next('/login'); // ログイン済みで無い場合は、ログイン画面へリダイレクト
+    }
+  }
 }, {
   path: "/profile",
   // STEP編集画面へのパス

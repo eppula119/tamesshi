@@ -91,18 +91,27 @@ const routes = [
     }
   },
   {
-    path: '/step_list/:id', // STEP詳細画面へのパス
-    component: StepDetail,
-    props: true
-  },
-  {
     path: '/step_list/step=:step_id/child', // 子STEP詳細画面へのパス
     component: ChildStep,
-    props: true
+    props: true,
+    beforeEnter(to, from, next) {
+      if (store.getters["auth/check"]) {
+        next();
+      } else {
+        next('/login'); // ログイン済みで無い場合は、ログイン画面へリダイレクト
+      }
+    }
   },
   {
     path: '/mypage',
     component: Mypage,
+    beforeEnter(to, from, next) {
+      if (store.getters["auth/check"]) {
+        next();
+      } else {
+        next('/login'); // ログイン済みで無い場合は、ログイン画面へリダイレクト
+      }
+    }
   },
   {
     path: "/profile", // STEP編集画面へのパス

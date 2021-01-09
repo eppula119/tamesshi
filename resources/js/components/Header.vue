@@ -32,7 +32,7 @@
               <RouterLink to="/mypage">マイページ</RouterLink>
             </li>
             <li class="p-menuItem">
-              <RouterLink to="/">TOPページ</RouterLink>
+              <RouterLink to="/top">TOPページ</RouterLink>
             </li>
             <li class="p-menuItem">
               <button @click.prevent="registerStep">STEP登録</button>

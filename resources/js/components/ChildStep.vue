@@ -146,7 +146,7 @@ export default {
         "あなたに合った学習方法が見つかるかも？「STEP」" +
         "%20%23STEP" +
         "&url=" +
-        "http://steps/twitter-share";
+        "https://gentle-basin-84705.herokuapp.com/top";
       //シェア用の画面へ移行
       location.href = shareURL;
     },
