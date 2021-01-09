@@ -2768,6 +2768,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     return {
       tab: 1,
       title: "ログイン",
+      message: "ご登録メールアドレスを入力し送信してください。後ほど再設定のためのリンクを記載したメールを送らせていただきます。",
       loginForm: {
         email: "",
         password: ""
@@ -2861,7 +2862,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
             switch (_context3.prev = _context3.next) {
               case 0:
                 console.log("メール送信API発動");
-                alert("forgot");
+                alert("登録しメールアドレスに送信します。よろしいですか？");
                 _context3.next = 4;
                 return _this3.$store.dispatch("auth/forgot", _this3.forgotForm);
 
@@ -2875,6 +2876,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
                   _this3.clearError(); // AUTHストアのエラーメッセージをクリア
 
+
+                  _this3.message = "入力したメールアドレスに再設定用リンクを記載したメールを送信しました。そちらのリンクより新パスワードの設定をお願いします。";
                 }
 
               case 5:
@@ -8073,9 +8076,7 @@ var render = function() {
               : _vm._e(),
             _vm._v(" "),
             _c("p", { staticClass: "c-form__comment" }, [
-              _vm._v(
-                "\n          ご登録メールアドレスを送信してください。後ほど再設定のためのリンクを記載したメールを送らせていただきます。\n        "
-              )
+              _vm._v("\n          " + _vm._s(_vm.message) + "\n        ")
             ]),
             _vm._v(" "),
             _c("input", {

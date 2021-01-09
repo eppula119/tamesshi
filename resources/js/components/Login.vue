@@ -158,7 +158,7 @@
           </span>
 
           <p class="c-form__comment">
-            ご登録メールアドレスを送信してください。後ほど再設定のためのリンクを記載したメールを送らせていただきます。
+            {{ message }}
           </p>
 
           <input type="submit" class="c-btn c-btnAuth" value="送信" />
@@ -182,6 +182,8 @@ export default {
     return {
       tab: 1,
       title: "ログイン",
+      message:
+        "ご登録メールアドレスを入力し送信してください。後ほど再設定のためのリンクを記載したメールを送らせていただきます。",
       loginForm: {
         email: "",
         password: "",
@@ -220,7 +222,7 @@ export default {
     },
     async forgot() {
       console.log("メール送信API発動");
-      alert("forgot");
+      alert("登録しメールアドレスに送信します。よろしいですか？");
       await this.$store.dispatch("auth/forgot", this.forgotForm); // authストアのforgotアクションを呼び出す
       if (this.apiStatus) {
         this.$store.commit("message/setContent", {
@@ -228,6 +230,8 @@ export default {
           timeout: 10000,
         });
         this.clearError(); // AUTHストアのエラーメッセージをクリア
+        this.message =
+          "入力したメールアドレスに再設定用リンクを記載したメールを送信しました。そちらのリンクより新パスワードの設定をお願いします。";
       }
     },
     clearError() {
