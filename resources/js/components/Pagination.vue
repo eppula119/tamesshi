@@ -8,7 +8,8 @@
     :next-text="'＞'"
     :container-class="'pagination'"
     :page-class="'c-pagenation__item'"
-  >></paginate>
+    >></paginate
+  >
 </template>
 
 <script>
@@ -22,12 +23,12 @@ export default {
   props: {
     items: {
       required: false,
-      default: []
-    }
+      default: [],
+    },
   },
   data() {
     return {
-      length: 3 // 1ページに表示するアイディアの数
+      length: 6, // 1ページに表示するアイディアの数
     };
   },
   methods: {
@@ -40,7 +41,7 @@ export default {
   computed: {
     // 全ページ数
     paginationNumber() {
-      return this.items.length / 3;
+      return this.items.length / 6;
     },
     page: {
       get() {
@@ -48,8 +49,8 @@ export default {
       },
       set(pageNum) {
         this.$store.dispatch("paging/setPageNum", pageNum); // pageストアに移動先のページ番号をセット
-      }
-    }
-  }
+      },
+    },
+  },
 };
 </script>

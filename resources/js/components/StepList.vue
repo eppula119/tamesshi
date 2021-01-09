@@ -36,7 +36,7 @@ export default {
     return {
       currentPage: 0,
       lastPage: 0,
-      length: 3,
+      length: 6,
       favorites_count: 12,
       favorites_by_user: true,
     };
@@ -67,7 +67,7 @@ export default {
     }),
     // 表示したいデータの最初の値
     listStart() {
-      return 3 * (this.$store.state.paging.paginationNumber - 1);
+      return 6 * (this.$store.state.paging.paginationNumber - 1);
     },
     //　表示したデータを取得。1〜6、7〜12、13〜18...の6ごとのデータを取得
     filtered() {
