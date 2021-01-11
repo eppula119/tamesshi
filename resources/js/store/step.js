@@ -12,6 +12,7 @@ const state = {
   }, // 検索パラメータ
   searchFlg: false,
   categoryMenu: false,
+  headerMenu: false,
   step_id: "",
 
 }
@@ -91,6 +92,9 @@ const mutations = {
   setCategoryMenu(state, boolean) {
     state.categoryMenu = boolean;
   },
+  setHeaderMenu(state, boolean) {
+    state.headerMenu = boolean;
+  },
   setFavSteps(state, steps) {
     state.favSteps = steps;
   },
@@ -121,6 +125,10 @@ const actions = {
   // stateのcategoryMenu情報を更新
   async setCategoryMenu(context, boolean) {
     context.commit('setCategoryMenu', boolean)
+  },
+  // stateのheaderMenu情報を更新
+  async setHeaderMenu(context, boolean) {
+    context.commit('setHeaderMenu', boolean)
   },
   // stateのstep情報を更新
   async setFavSteps(context, steps) {

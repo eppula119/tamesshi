@@ -4,15 +4,16 @@
   border: none;
   border-style: none;
   border-radius: 30px;
-  border-bottom: solid 1px $color_shadow;
   box-shadow: 0px 0px 1px rgba(0, 0, 0, 0.8);
   cursor: pointer;
+  outline: none;
 }
 .c-btn:active {
   -webkit-transform: translateY(1px);
   transform: translateY(1px);
   box-shadow: 0px 0px 1px rgba(0, 0, 0, 0.2);
   border-bottom: none;
+  outline: none;
 }
 .c-btnAuth {
   color: $color_light100;
@@ -30,7 +31,6 @@
   float: right;
   padding: $space_l;
   margin-bottom: $space_s;
-  border-bottom: solid 1px $color_shadow;
   box-sizing: border-box;
   box-shadow: 0px 0px 1px rgba(0, 0, 0, 0.8);
   background-color: $color_light100;
@@ -79,4 +79,9 @@
   width: 100%;
   padding: 0;
   text-align: left;
+}
+
+.c-menuBtn {
+  background: none;
+  border: none;
 }

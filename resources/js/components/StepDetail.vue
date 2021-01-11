@@ -9,7 +9,7 @@
         >
         <span
           class="p-indexContainer__fav"
-          :class="{ 'p-indexContainer--favorited': step.favorited_by_user }"
+          :class="{ 'p-indexContainer--favorited': favFlg }"
           @click="onFavoriteClick"
         >
           <i class="fas fa-heart p-fav"></i>
@@ -34,7 +34,7 @@
       </div>
       <!-- ---------------------------------ボタン部分 -------------------------------- -->
       <div class="p-btnContainer" v-if="myStep">
-        <button class="p-btnContainer__edit" @click="edit">編集</button>
+        <button class="c-btn p-btnContainer__edit" @click="edit">編集</button>
       </div>
       <button
         type="submit"
@@ -75,6 +75,7 @@ export default {
         favorites_by_user: false,
       },
       myStep: false,
+      favFlg: false,
     };
   },
   computed: {
@@ -118,8 +119,10 @@ export default {
       }
 
       if (this.step.favorited_by_user) {
+        this.favFlg = false;
         this.unfavorite();
       } else {
+        this.favFlg = true;
         this.favorite();
       }
     },

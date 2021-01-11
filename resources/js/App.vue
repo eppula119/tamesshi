@@ -1,5 +1,5 @@
 <template>
-  <div v-on:click="categoryClose()">
+  <div v-on:click="menuClose()">
     <Header />
     <Message />
     <Modal />
@@ -14,6 +14,7 @@ import Footer from "./components/Footer.vue";
 import Header from "./components/Header.vue";
 import Message from "./components/Message.vue";
 import Modal from "./components/Modal.vue";
+import { mapState, mapGetters } from "vuex";
 
 export default {
   components: {
@@ -26,11 +27,17 @@ export default {
     errorCode() {
       return this.$store.state.error.code; // エラーstateを参照
     },
+    ...mapState({
+      headerMenu: (state) => state.step.headerMenu,
+    }),
   },
   methods: {
-    categoryClose() {
-      console.log("カテゴリークローズ");
+    menuClose() {
+      console.log("カテゴリーメニュークローズ");
       this.$store.dispatch("step/setCategoryMenu", false);
+
+      console.log("ヘッダーメニュークローズ");
+      this.$store.dispatch("step/setHeaderMenu", false);
     },
   },
   watch: {

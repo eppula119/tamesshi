@@ -23,52 +23,56 @@
         </form>
       </div>
       <div class="p-header__menu">
-        <button class="p-menuBtn" v-on:click="isActive = !isActive">
+        <button class="p-menuBtn" v-on:click.stop="headerMenuTrigger()">
           メニュー
         </button>
-        <div class="p-headerMenu" v-bind:class="{ active: isActive }">
-          <ul class="p-headerMenu__list" v-show="isActive">
+        <div class="p-headerMenu"  v-bind:class="{ active: headerMenu }">
+          <ul class="p-headerMenu__list" v-show="headerMenu" >
             <li class="p-menuItem">
-              <RouterLink to="/mypage">マイページ</RouterLink>
+              <RouterLink　class="p-menuItem__link" to="/mypage">マイページ</RouterLink>
             </li>
             <li class="p-menuItem">
-              <RouterLink to="/top">TOPページ</RouterLink>
+              <RouterLink class="p-menuItem__link" to="/top">TOPページ</RouterLink>
             </li>
             <li class="p-menuItem">
-              <button @click.prevent="registerStep">STEP登録</button>
+              <button class="c-menuBtn" @click.prevent="registerStep">
+                STEP登録
+              </button>
             </li>
             <li class="p-menuItem">
-              <RouterLink to="/login">ユーザー登録</RouterLink>
+              <RouterLink class="p-menuItem__link" to="/login">ユーザー登録</RouterLink>
             </li>
             <li class="p-menuItem">
-              <RouterLink to="/profile">プロフィール登録</RouterLink>
+              <RouterLink class="p-menuItem__link" to="/profile">プロフィール登録</RouterLink>
             </li>
             <li class="p-menuItem" v-if="isLogin">
               <form action method="POST" @submit.prevent="logout">
-                <button type="submit" class="p-logout c-btn">ログアウト</button>
+                <button type="submit" class="p-logout c-menuBtn">
+                  ログアウト
+                </button>
               </form>
             </li>
             <li class="p-menuItem" v-else>
-              <RouterLink to="/login">ログイン</RouterLink>
+              <RouterLink class="p-menuItem__link" to="/login">ログイン</RouterLink>
             </li>
           </ul>
         </div>
       </div>
       <div
         class="p-headerMenuTrigger js-toggle-sp-menu"
-        v-on:click="isActive = !isActive"
+        v-on:click.stop="headerMenuTrigger()"
       >
         <span
           class="p-headerMenuTrigger__border"
-          v-bind:class="{ active: isActive }"
+          v-bind:class="{ active: headerMenu }"
         ></span>
         <span
           class="p-headerMenuTrigger__border"
-          v-bind:class="{ active: isActive }"
+          v-bind:class="{ active: headerMenu }"
         ></span>
         <span
           class="p-headerMenuTrigger__border"
-          v-bind:class="{ active: isActive }"
+          v-bind:class="{ active: headerMenu }"
         ></span>
       </div>
     </div>
@@ -86,7 +90,6 @@ export default {
   },
   data() {
     return {
-      isActive: false,
       words: "",
     };
   },
@@ -95,6 +98,7 @@ export default {
       apiStatus: (state) => state.auth.apiStatus,
       stepList: (state) => state.paging.stepList,
       top: (state) => state.paging.top,
+      headerMenu: (state) => state.step.headerMenu,
     }),
     ...mapGetters({
       isLogin: "auth/check", //ログインしているかチェック
@@ -120,11 +124,23 @@ export default {
     searchTitle() {
       this.$refs.searchTitle.serchTitle(this.words);
     },
+    async headerMenuTrigger() {
+      console.log("トリガー発動");
+      if (!this.headerMenu) {
+        console.log("ヘッダーメニューオープン");
+        return this.$store.dispatch("step/setHeaderMenu", true);
+      } else {
+        console.log("ヘッダーメニュークローズ");
+        return this.$store.dispatch("step/setHeaderMenu", false);
+      }
+    },
   },
   watch: {
     // ルート変更を監視
     $route(to, from) {
-      this.isActive = false; // ルート変更時、メニューを閉じる
+      // ルート変更時、メニューを閉じる
+      console.log("ヘッダーメニュークローズ");
+      this.$store.dispatch("step/setHeaderMenu", false);
     },
   },
 };

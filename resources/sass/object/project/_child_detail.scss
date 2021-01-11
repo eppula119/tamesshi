@@ -40,6 +40,8 @@
   &__content {
     margin-bottom: $space_8l;
     .p-childContent {
+      white-space: pre-wrap;
+      word-break: break-all;
     }
   }
   &__img {

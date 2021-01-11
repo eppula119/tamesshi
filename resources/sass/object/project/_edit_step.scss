@@ -16,6 +16,22 @@
       height: 40px;
     }
   }
+  &__edit {
+  width: 100%;
+  background-color: $color_sub;
+  color: $color_light100;
+  margin-bottom: $space_4l;
+  padding: $space_3l $space_xl;
+  margin-top: $space_6l;
+  box-shadow: 0 0 10px rgba(0, 0, 0, .4);
+  outline: none;
+  transition-duration: 0.06s;
+  }
+  &__edit:active {
+  transform: translate3d(0, 5px, 0);
+  box-shadow: none;
+  outline: none;
+}
 }
 .p-linkMypage {
   border-radius: 6px;

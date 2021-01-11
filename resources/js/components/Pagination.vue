@@ -6,8 +6,11 @@
     :margin-pages="0"
     :prev-text="'＜'"
     :next-text="'＞'"
+    :prev-class="'c-prev'"
+    :next-class="'c-next'"
     :container-class="'pagination'"
     :page-class="'c-pagenation__item'"
+    :page-link-class="'c-pageLink'"
     >></paginate
   >
 </template>
@@ -41,7 +44,7 @@ export default {
   computed: {
     // 全ページ数
     paginationNumber() {
-      return this.items.length / 6;
+      return Math.ceil(this.items.length / 6);
     },
     page: {
       get() {

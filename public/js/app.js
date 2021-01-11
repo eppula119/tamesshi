@@ -1925,6 +1925,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_Header_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./components/Header.vue */ "./resources/js/components/Header.vue");
 /* harmony import */ var _components_Message_vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./components/Message.vue */ "./resources/js/components/Message.vue");
 /* harmony import */ var _components_Modal_vue__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./components/Modal.vue */ "./resources/js/components/Modal.vue");
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 //
 //
 //
@@ -1935,6 +1942,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+
 
 
 
@@ -1947,15 +1955,21 @@ __webpack_require__.r(__webpack_exports__);
     Message: _components_Message_vue__WEBPACK_IMPORTED_MODULE_3__["default"],
     Modal: _components_Modal_vue__WEBPACK_IMPORTED_MODULE_4__["default"]
   },
-  computed: {
+  computed: _objectSpread({
     errorCode: function errorCode() {
       return this.$store.state.error.code; // エラーstateを参照
     }
-  },
+  }, Object(vuex__WEBPACK_IMPORTED_MODULE_5__["mapState"])({
+    headerMenu: function headerMenu(state) {
+      return state.step.headerMenu;
+    }
+  })),
   methods: {
-    categoryClose: function categoryClose() {
-      console.log("カテゴリークローズ");
+    menuClose: function menuClose() {
+      console.log("カテゴリーメニュークローズ");
       this.$store.dispatch("step/setCategoryMenu", false);
+      console.log("ヘッダーメニュークローズ");
+      this.$store.dispatch("step/setHeaderMenu", false);
     }
   },
   watch: {
@@ -2475,6 +2489,10 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -2483,7 +2501,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   },
   data: function data() {
     return {
-      isActive: false,
       words: ""
     };
   },
@@ -2496,6 +2513,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     },
     top: function top(state) {
       return state.paging.top;
+    },
+    headerMenu: function headerMenu(state) {
+      return state.step.headerMenu;
     }
   })), Object(vuex__WEBPACK_IMPORTED_MODULE_2__["mapGetters"])({
     isLogin: "auth/check" //ログインしているかチェック
@@ -2556,12 +2576,44 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     },
     searchTitle: function searchTitle() {
       this.$refs.searchTitle.serchTitle(this.words);
+    },
+    headerMenuTrigger: function headerMenuTrigger() {
+      var _this3 = this;
+
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee3() {
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee3$(_context3) {
+          while (1) {
+            switch (_context3.prev = _context3.next) {
+              case 0:
+                console.log("トリガー発動");
+
+                if (_this3.headerMenu) {
+                  _context3.next = 6;
+                  break;
+                }
+
+                console.log("ヘッダーメニューオープン");
+                return _context3.abrupt("return", _this3.$store.dispatch("step/setHeaderMenu", true));
+
+              case 6:
+                console.log("ヘッダーメニュークローズ");
+                return _context3.abrupt("return", _this3.$store.dispatch("step/setHeaderMenu", false));
+
+              case 8:
+              case "end":
+                return _context3.stop();
+            }
+          }
+        }, _callee3);
+      }))();
     }
   },
   watch: {
     // ルート変更を監視
     $route: function $route(to, from) {
-      this.isActive = false; // ルート変更時、メニューを閉じる
+      // ルート変更時、メニューを閉じる
+      console.log("ヘッダーメニュークローズ");
+      this.$store.dispatch("step/setHeaderMenu", false);
     }
   }
 });
@@ -3292,6 +3344,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 
 
 
@@ -3305,7 +3361,7 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.component("paginate", vuejs_paginate_
   },
   data: function data() {
     return {
-      length: 3 // 1ページに表示するアイディアの数
+      length: 6 // 1ページに表示するアイディアの数
 
     };
   },
@@ -3318,7 +3374,7 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.component("paginate", vuejs_paginate_
   computed: {
     // 全ページ数
     paginationNumber: function paginationNumber() {
-      return this.items.length / 3;
+      return Math.ceil(this.items.length / 6);
     },
     page: {
       get: function get() {
@@ -4712,7 +4768,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         favorites_count: 12,
         favorites_by_user: false
       },
-      myStep: false
+      myStep: false,
+      favFlg: false
     };
   },
   computed: _objectSpread(_objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_2__["mapGetters"])({
@@ -4783,8 +4840,10 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       }
 
       if (this.step.favorited_by_user) {
+        this.favFlg = false;
         this.unfavorite();
       } else {
+        this.favFlg = true;
         this.favorite();
       }
     },
@@ -5022,7 +5081,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     return {
       currentPage: 0,
       lastPage: 0,
-      length: 3,
+      length: 6,
       favorites_count: 12,
       favorites_by_user: true
     };
@@ -5077,7 +5136,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   })), {}, {
     // 表示したいデータの最初の値
     listStart: function listStart() {
-      return 3 * (this.$store.state.paging.paginationNumber - 1);
+      return 6 * (this.$store.state.paging.paginationNumber - 1);
     },
     //　表示したデータを取得。1〜6、7〜12、13〜18...の6ごとのデータを取得
     filtered: function filtered() {
@@ -7055,7 +7114,7 @@ var render = function() {
     {
       on: {
         click: function($event) {
-          return _vm.categoryClose()
+          return _vm.menuClose()
         }
       }
     },
@@ -7422,7 +7481,8 @@ var render = function() {
                   staticClass: "p-menuBtn",
                   on: {
                     click: function($event) {
-                      _vm.isActive = !_vm.isActive
+                      $event.stopPropagation()
+                      return _vm.headerMenuTrigger()
                     }
                   }
                 },
@@ -7433,7 +7493,7 @@ var render = function() {
                 "div",
                 {
                   staticClass: "p-headerMenu",
-                  class: { active: _vm.isActive }
+                  class: { active: _vm.headerMenu }
                 },
                 [
                   _c(
@@ -7443,8 +7503,8 @@ var render = function() {
                         {
                           name: "show",
                           rawName: "v-show",
-                          value: _vm.isActive,
-                          expression: "isActive"
+                          value: _vm.headerMenu,
+                          expression: "headerMenu"
                         }
                       ],
                       staticClass: "p-headerMenu__list"
@@ -7454,9 +7514,14 @@ var render = function() {
                         "li",
                         { staticClass: "p-menuItem" },
                         [
-                          _c("RouterLink", { attrs: { to: "/mypage" } }, [
-                            _vm._v("マイページ")
-                          ])
+                          _c(
+                            "RouterLink",
+                            {
+                              staticClass: "p-menuItem__link",
+                              attrs: { to: "/mypage" }
+                            },
+                            [_vm._v("マイページ")]
+                          )
                         ],
                         1
                       ),
@@ -7465,9 +7530,14 @@ var render = function() {
                         "li",
                         { staticClass: "p-menuItem" },
                         [
-                          _c("RouterLink", { attrs: { to: "/top" } }, [
-                            _vm._v("TOPページ")
-                          ])
+                          _c(
+                            "RouterLink",
+                            {
+                              staticClass: "p-menuItem__link",
+                              attrs: { to: "/top" }
+                            },
+                            [_vm._v("TOPページ")]
+                          )
                         ],
                         1
                       ),
@@ -7476,6 +7546,7 @@ var render = function() {
                         _c(
                           "button",
                           {
+                            staticClass: "c-menuBtn",
                             on: {
                               click: function($event) {
                                 $event.preventDefault()
@@ -7483,7 +7554,7 @@ var render = function() {
                               }
                             }
                           },
-                          [_vm._v("STEP登録")]
+                          [_vm._v("\n              STEP登録\n            ")]
                         )
                       ]),
                       _vm._v(" "),
@@ -7491,9 +7562,14 @@ var render = function() {
                         "li",
                         { staticClass: "p-menuItem" },
                         [
-                          _c("RouterLink", { attrs: { to: "/login" } }, [
-                            _vm._v("ユーザー登録")
-                          ])
+                          _c(
+                            "RouterLink",
+                            {
+                              staticClass: "p-menuItem__link",
+                              attrs: { to: "/login" }
+                            },
+                            [_vm._v("ユーザー登録")]
+                          )
                         ],
                         1
                       ),
@@ -7502,9 +7578,14 @@ var render = function() {
                         "li",
                         { staticClass: "p-menuItem" },
                         [
-                          _c("RouterLink", { attrs: { to: "/profile" } }, [
-                            _vm._v("プロフィール登録")
-                          ])
+                          _c(
+                            "RouterLink",
+                            {
+                              staticClass: "p-menuItem__link",
+                              attrs: { to: "/profile" }
+                            },
+                            [_vm._v("プロフィール登録")]
+                          )
                         ],
                         1
                       ),
@@ -7526,10 +7607,14 @@ var render = function() {
                                 _c(
                                   "button",
                                   {
-                                    staticClass: "p-logout c-btn",
+                                    staticClass: "p-logout c-menuBtn",
                                     attrs: { type: "submit" }
                                   },
-                                  [_vm._v("ログアウト")]
+                                  [
+                                    _vm._v(
+                                      "\n                ログアウト\n              "
+                                    )
+                                  ]
                                 )
                               ]
                             )
@@ -7538,9 +7623,14 @@ var render = function() {
                             "li",
                             { staticClass: "p-menuItem" },
                             [
-                              _c("RouterLink", { attrs: { to: "/login" } }, [
-                                _vm._v("ログイン")
-                              ])
+                              _c(
+                                "RouterLink",
+                                {
+                                  staticClass: "p-menuItem__link",
+                                  attrs: { to: "/login" }
+                                },
+                                [_vm._v("ログイン")]
+                              )
                             ],
                             1
                           )
@@ -7556,24 +7646,25 @@ var render = function() {
                 staticClass: "p-headerMenuTrigger js-toggle-sp-menu",
                 on: {
                   click: function($event) {
-                    _vm.isActive = !_vm.isActive
+                    $event.stopPropagation()
+                    return _vm.headerMenuTrigger()
                   }
                 }
               },
               [
                 _c("span", {
                   staticClass: "p-headerMenuTrigger__border",
-                  class: { active: _vm.isActive }
+                  class: { active: _vm.headerMenu }
                 }),
                 _vm._v(" "),
                 _c("span", {
                   staticClass: "p-headerMenuTrigger__border",
-                  class: { active: _vm.isActive }
+                  class: { active: _vm.headerMenu }
                 }),
                 _vm._v(" "),
                 _c("span", {
                   staticClass: "p-headerMenuTrigger__border",
-                  class: { active: _vm.isActive }
+                  class: { active: _vm.headerMenu }
                 })
               ]
             )
@@ -8330,8 +8421,11 @@ var render = function() {
         "margin-pages": 0,
         "prev-text": "＜",
         "next-text": "＞",
+        "prev-class": "c-prev",
+        "next-class": "c-next",
         "container-class": "pagination",
-        "page-class": "c-pagenation__item"
+        "page-class": "c-pagenation__item",
+        "page-link-class": "c-pageLink"
       },
       model: {
         value: _vm.page,
@@ -9481,9 +9575,7 @@ var render = function() {
             "span",
             {
               staticClass: "p-indexContainer__fav",
-              class: {
-                "p-indexContainer--favorited": _vm.step.favorited_by_user
-              },
+              class: { "p-indexContainer--favorited": _vm.favFlg },
               on: { click: _vm.onFavoriteClick }
             },
             [_c("i", { staticClass: "fas fa-heart p-fav" })]
@@ -9539,7 +9631,7 @@ var render = function() {
               _c(
                 "button",
                 {
-                  staticClass: "p-btnContainer__edit",
+                  staticClass: "c-btn p-btnContainer__edit",
                   on: { click: _vm.edit }
                 },
                 [_vm._v("編集")]
@@ -28765,6 +28857,7 @@ var state = {
   // 検索パラメータ
   searchFlg: false,
   categoryMenu: false,
+  headerMenu: false,
   step_id: ""
 };
 var getters = {
@@ -28844,6 +28937,9 @@ var mutations = {
   setCategoryMenu: function setCategoryMenu(state, _boolean) {
     state.categoryMenu = _boolean;
   },
+  setHeaderMenu: function setHeaderMenu(state, _boolean2) {
+    state.headerMenu = _boolean2;
+  },
   setFavSteps: function setFavSteps(state, steps) {
     state.favSteps = steps;
   },
@@ -28921,13 +29017,13 @@ var actions = {
     }))();
   },
   // stateのcategoryMenu情報を更新
-  setCategoryMenu: function setCategoryMenu(context, _boolean2) {
+  setCategoryMenu: function setCategoryMenu(context, _boolean3) {
     return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee5() {
       return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee5$(_context5) {
         while (1) {
           switch (_context5.prev = _context5.next) {
             case 0:
-              context.commit('setCategoryMenu', _boolean2);
+              context.commit('setCategoryMenu', _boolean3);
 
             case 1:
             case "end":
@@ -28937,14 +29033,14 @@ var actions = {
       }, _callee5);
     }))();
   },
-  // stateのstep情報を更新
-  setFavSteps: function setFavSteps(context, steps) {
+  // stateのheaderMenu情報を更新
+  setHeaderMenu: function setHeaderMenu(context, _boolean4) {
     return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee6() {
       return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee6$(_context6) {
         while (1) {
           switch (_context6.prev = _context6.next) {
             case 0:
-              context.commit('setFavSteps', steps);
+              context.commit('setHeaderMenu', _boolean4);
 
             case 1:
             case "end":
@@ -28955,13 +29051,13 @@ var actions = {
     }))();
   },
   // stateのstep情報を更新
-  setChallengeSteps: function setChallengeSteps(context, steps) {
+  setFavSteps: function setFavSteps(context, steps) {
     return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee7() {
       return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee7$(_context7) {
         while (1) {
           switch (_context7.prev = _context7.next) {
             case 0:
-              context.commit('setChallengeSteps', steps);
+              context.commit('setFavSteps', steps);
 
             case 1:
             case "end":
@@ -28969,6 +29065,23 @@ var actions = {
           }
         }
       }, _callee7);
+    }))();
+  },
+  // stateのstep情報を更新
+  setChallengeSteps: function setChallengeSteps(context, steps) {
+    return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee8() {
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee8$(_context8) {
+        while (1) {
+          switch (_context8.prev = _context8.next) {
+            case 0:
+              context.commit('setChallengeSteps', steps);
+
+            case 1:
+            case "end":
+              return _context8.stop();
+          }
+        }
+      }, _callee8);
     }))();
   }
 };

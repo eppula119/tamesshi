@@ -1,3 +1,28 @@
+/* ---------------------------- */
+/* --- ハートアニメーション --- */
+/* ---------------------------- */
+@keyframes heartAnimation {
+  0% {
+    /* アイコンサイズをもとのより小さくする */
+    transform: scale(0.5);
+  }
+  10% {
+    transform: scale(0.7);
+  }
+  30% {
+    transform: scale(0.9);
+  }
+  50% {
+    transform: scale(1.2);
+  }
+  80% {
+    transform: scale(1.5);
+  }
+  100% {
+    /* もとのサイズに戻す */
+    transform: scale(1.0);
+  }
+}
 //=================== STEP詳細画面 =================================
 .p-indexContainer {
   margin-bottom: $space_6l;
@@ -41,6 +66,7 @@
     font-size: $font-size_3l;
     position: absolute;
     right: 0;
+    transition: 0.3s;
     @include  mq() {
       top: -3px;
     }
@@ -49,8 +75,12 @@
     }
   }
   &--favorited {
+      /* heartAnimationアニメーションを200ミリ秒かけて実行する */
+    animation: heartAnimation .3s;
     color: $color_fav;
+    font-size: 30px;
   }
+  
 }
 .p-detailTitle {
   border-bottom: solid 1px gray;
@@ -66,7 +96,8 @@
   box-sizing: border-box;
   margin-bottom: $space_6l;
   &__text {
-
+    word-break: break-all;
+    white-space: pre-wrap;
   }
 }
 .p-detailImage {
@@ -97,7 +128,10 @@
     }
   }
   &__title {
-
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+    overflow: hidden;
   }
 }
 .p-btnChallenge {
@@ -106,6 +140,14 @@
   margin-bottom: $space_4l;
   padding: $space_3l $space_xl;
   margin-top: $space_6l;
+  box-shadow: 0 0 10px rgba(0, 0, 0, .4);
+  outline: none;
+  transition-duration: 0.06s;
+}
+.p-btnChallenge:active {
+  transform: translate3d(0, 5px, 0);
+  box-shadow: none;
+  outline: none;
 }
 .p-snsBtn {
   background-color: $color_light100;
@@ -117,3 +159,4 @@
   box-sizing: border-box;
   letter-spacing: 1px;
 }
+

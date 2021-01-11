@@ -167,6 +167,9 @@
   }
   .p-stepListPage {
     margin-top: calc( #{ $space_10l } * 2 );
+    margin-bottom: 0;
+    padding-bottom: calc( #{ $space_10l } + #{ $space_3l } );
+    box-sizing: border-box;
     &__item {
       border: none;
       background-color: $color_light100;

@@ -66,6 +66,7 @@
   }
   &__menu {
     margin-right: $space_3l;
+    position: relative;
     .p-menuBtn {
       border: solid 1px $color_dark050;
       background-color: $color_light100;
@@ -78,12 +79,16 @@
     }
     .p-headerMenu {
       position: absolute;
+      width: 180%;
+      right: 0px;
+      text-align: center;
       background: $color_light100;
       font-size: $font-size_s;
       padding: $space_m;
       box-sizing: border-box;
       border-radius: 8px;
       z-index: 1;
+      
       @include mq('tab') {
         top: 0px;
         width: 50%;
@@ -110,7 +115,7 @@
       }
       &__list {
         .p-menuItem {
-          margin-bottom: $space_m;
+          margin-bottom: $space_l;
           @include mq('tab') {
             padding: $space_xl 0;
             box-sizing: border-box;
@@ -122,6 +127,10 @@
               box-shadow: none;
             }
           }
+          &__link {
+            color: black;
+            text-decoration: none;
+          }
         }
         .p-menuItem:last-child {
           margin-bottom: 0;
@@ -130,6 +139,8 @@
     }
     .active {
       display: block;
+      z-index: 2;
+      box-shadow: 0 0 10px rgba(0, 0, 0, .2);
       @include mq('tab') {
         transform: translatex(-100%);
         -webkit-transform: translatex(-100%);

@@ -2,17 +2,26 @@
   .c-pagenation {
     display: flex;
     justify-content: center;
-    &__item {
-      padding: 0 $space_m;
+    &__item, .c-prev, .c-next {
+      padding: 3px $space_l;
       margin: 0 $space_m;
       box-sizing: border-box;
       font-size: $font-size_s;
       border: solid 1px $color_dark025;
-      .c-pageLink {
-        color: $color_dark075;
-      }
+      border-radius: 3px;
+      line-height: 20px;
+      background-color: $color_light100;
+      color: $color_sub;
+      
       @include mq(){
         margin: 0 $space_s;
+        padding: 3px $space_m ;
       }
     }
+    &__item.active {
+      .c-pageLink {
+        color: $color_dark100;
+      }
+    }
+    
   }
