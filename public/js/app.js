@@ -3494,6 +3494,10 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -3513,7 +3517,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         image: [],
         profile: [],
         email: []
-      }
+      },
+      img_message: "ドラッグ＆ドロップ"
     };
   },
   computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_2__["mapState"])({
@@ -3554,12 +3559,14 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       console.log(event.target.files[0]); // データURL形式で受け取ったファイルを読み込む
 
       reader.readAsDataURL(event.target.files[0]);
+      this.img_message = "";
       this.image = event.target.files[0];
     },
     // 入力欄の値とプレビュー表示をクリアするメソッド
     reset: function reset() {
       this.preview = "";
       this.image = "";
+      this.img_message = "ドラッグ＆ドロップ";
       this.$el.querySelector('input[type="file"]').value = null;
     },
     // 更新する
@@ -3661,11 +3668,16 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
                 _this3.profile = _this3.user.profile;
                 _this3.preview = _this3.user.image;
-                _this3.email = _this3.user.email; // 通信成功時、stepストアに子STEPを全てセット
+                _this3.email = _this3.user.email;
+
+                if (_this3.preview) {
+                  _this3.img_message = "";
+                } // 通信成功時、stepストアに子STEPを全てセット
                 // this.$store.dispatch("step/setSteps", response.data.step);
                 // this.$store.dispatch("step/setChildSteps", response.data.child);
 
-              case 4:
+
+              case 5:
               case "end":
                 return _context2.stop();
             }
@@ -3833,6 +3845,17 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -3852,6 +3875,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         content: [],
         time: []
       },
+      img_message: "ドラッグ＆ドロップ",
+      // 画像アップロード注意書き
       page: 1,
       //　現在の子STEP番号
       perPage: perPage,
@@ -3891,18 +3916,14 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
       // 何も選択されていなかったら処理中断
       if (event.target.files.length === 0) {
-        this.preview = "";
-        this.image = "";
-        this.$el.querySelector('input[type="file"]').value = null;
+        this.reset();
         return false;
       } // ファイルが画像ではなかったら処理中断
 
 
       if (!event.target.files[0].type.match("image.*")) {
         this.errors.image = ["ファイル形式が画像タイプではありません"];
-        this.preview = "";
-        this.image = "";
-        this.$el.querySelector('input[type="file"]').value = null;
+        this.reset();
         return false;
       } // FileReaderクラスのインスタンスを取得
 
@@ -3916,6 +3937,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 
       reader.readAsDataURL(event.target.files[0]);
+      this.img_message = "";
       this.image = event.target.files[0];
     },
     // 入力欄の値とプレビュー表示をクリアするメソッド
@@ -3925,6 +3947,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       this.image = "";
       this.content = "";
       this.time = "";
+      this.img_message = "ドラッグ＆ドロップ";
       this.$el.querySelector('input[type="file"]').value = null;
     },
     submit: function submit() {
@@ -4233,6 +4256,11 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -4251,7 +4279,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         category: [],
         time: []
       },
-      categorys: {}
+      categorys: {},
+      img_message: "ドラッグ＆ドロップ"
     };
   },
   computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_2__["mapState"])({
@@ -4292,11 +4321,13 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
       reader.readAsDataURL(event.target.files[0]);
       this.image = event.target.files[0];
+      this.img_message = "";
     },
     // 入力欄の値とプレビュー表示をクリアするメソッド
     reset: function reset() {
       this.preview = "";
       this.image = "";
+      this.img_message = "ドラッグ＆ドロップ";
       this.$el.querySelector('input[type="file"]').value = null;
     },
     submit: function submit() {
@@ -4659,6 +4690,12 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
     item: {
@@ -4748,6 +4785,14 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -4769,7 +4814,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         favorites_by_user: false
       },
       myStep: false,
-      favFlg: false
+      favFlg: ""
     };
   },
   computed: _objectSpread(_objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_2__["mapGetters"])({
@@ -4825,7 +4870,13 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
                   _this.myStep = true;
                 }
 
-              case 15:
+                if (response.data.step.favorited_by_user === true) {
+                  _this.favFlg = true;
+                } else {
+                  _this.favFlg = false;
+                }
+
+              case 16:
               case "end":
                 return _context.stop();
             }
@@ -4842,9 +4893,11 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       if (this.step.favorited_by_user) {
         this.favFlg = false;
         this.unfavorite();
+        console.log("いいね！");
       } else {
         this.favFlg = true;
         this.favorite();
+        console.log("いいね削除");
       }
     },
     // 気になるリスト登録
@@ -5086,6 +5139,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       favorites_by_user: true
     };
   },
+  mounted: function mounted() {
+    console.log("fetchSteps発動");
+    this.fetchSteps();
+  },
   methods: {
     // 全てのアイディアを取得
     fetchSteps: function fetchSteps() {
@@ -5158,36 +5215,15 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       return list;
     }
   }),
-  watch: {
-    $route: {
-      handler: function handler(to, from) {
-        var _this2 = this;
-
-        return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2() {
-          return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
-            while (1) {
-              switch (_context2.prev = _context2.next) {
-                case 0:
-                  console.log(from);
-                  console.log("$routeが変わった");
-                  _context2.next = 4;
-                  return _this2.fetchSteps();
-
-                case 4:
-                  // api通信開始メソッド実行
-                  console.log(to);
-
-                case 5:
-                case "end":
-                  return _context2.stop();
-              }
-            }
-          }, _callee2);
-        }))();
-      },
-      immediate: true // 起動時にも実行
-
-    }
+  watch: {// $route: {
+    //   async handler(to, from) {
+    //     console.log(from);
+    //     console.log("$routeが変わった");
+    //     await this.fetchSteps(); // api通信開始メソッド実行
+    //     console.log(to);
+    //   },
+    //   immediate: true, // 起動時にも実行
+    // },
   }
 });
 
@@ -7311,7 +7347,7 @@ var render = function() {
             _c(
               "button",
               {
-                staticClass: "c-btn p-nextBtn",
+                staticClass: "c-btn p-preBtn",
                 attrs: { type: "submit" },
                 on: {
                   click: function($event) {
@@ -8478,8 +8514,11 @@ var render = function() {
         [
           _c("div", { staticClass: "p-fileContainer" }, [
             _c("label", { staticClass: "p-fileContainer__airDrop" }, [
-              _c("i", { staticClass: "fas fa-user p-userIcon" }),
-              _vm._v("ドラッグ＆ドロップ\n          "),
+              _c("i", {
+                staticClass: "fas fa-user p-userIcon",
+                class: { "p-userIcon--active": this.preview }
+              }),
+              _vm._v(_vm._s(_vm.img_message) + "\n          "),
               _c("input", {
                 staticClass: "p-dropImg",
                 attrs: { type: "file", name: "image" },
@@ -8809,23 +8848,34 @@ var render = function() {
             ]),
             _vm._v(" "),
             _c("div", { staticClass: "p-fileContainer" }, [
-              _c("label", { staticClass: "p-fileContainer__airDrop" }, [
-                _vm._v("\n            ドラッグ＆ドロップ\n            "),
-                _c("input", {
-                  staticClass: "p-dropImg",
-                  attrs: { type: "file", name: "image" },
-                  on: { change: _vm.onFileChange }
-                }),
-                _vm._v(" "),
-                _vm.preview
-                  ? _c("output", { staticClass: "p-outputImg" }, [
-                      _c("img", {
-                        staticClass: "p-outputImg__img",
-                        attrs: { src: _vm.preview }
-                      })
-                    ])
-                  : _vm._e()
-              ]),
+              _c(
+                "label",
+                {
+                  staticClass: "p-fileContainer__airDrop",
+                  class: { "p-fileContainer__airDrop--active": this.preview }
+                },
+                [
+                  _vm._v(
+                    "\n            " +
+                      _vm._s(_vm.img_message) +
+                      "\n            "
+                  ),
+                  _c("input", {
+                    staticClass: "p-dropImg",
+                    attrs: { type: "file", name: "image" },
+                    on: { change: _vm.onFileChange }
+                  }),
+                  _vm._v(" "),
+                  _vm.preview
+                    ? _c("output", { staticClass: "p-outputImg" }, [
+                        _c("img", {
+                          staticClass: "p-outputImg__img",
+                          attrs: { src: _vm.preview }
+                        })
+                      ])
+                    : _vm._e()
+                ]
+              ),
               _vm._v(" "),
               _vm.errors
                 ? _c(
@@ -8914,7 +8964,7 @@ var render = function() {
           _c(
             "button",
             {
-              staticClass: "c-btnEntry c-btn c-btn--white",
+              staticClass: "c-btnEntry c-btn c-btn--white p-btnEntry",
               attrs: { type: "submit" }
             },
             [_vm._v("\n        登録して次の子STEPへ→\n      ")]
@@ -8938,6 +8988,7 @@ var render = function() {
                 "button",
                 {
                   staticClass: "p-btnContainer__back",
+                  attrs: { type: "submit" },
                   on: {
                     click: function($event) {
                       $event.preventDefault()
@@ -8952,6 +9003,7 @@ var render = function() {
                 "button",
                 {
                   staticClass: "p-btnContainer__next",
+                  attrs: { type: "submit" },
                   on: {
                     click: function($event) {
                       $event.preventDefault()
@@ -8967,7 +9019,7 @@ var render = function() {
           _c(
             "RouterLink",
             { staticClass: "p-linkMypage", attrs: { to: "/mypage" } },
-            [_vm._v("マイページへ\n      ")]
+            [_vm._v("←マイページへ\n      ")]
           )
         ],
         1
@@ -9124,23 +9176,32 @@ var render = function() {
             "div",
             { staticClass: "p-fileContainer c-imgContainer--backgroundWhite" },
             [
-              _c("label", { staticClass: "p-fileContainer__airDrop" }, [
-                _vm._v("\n          ドラッグ＆ドロップ\n          "),
-                _c("input", {
-                  staticClass: "p-dropImg",
-                  attrs: { type: "file", name: "image" },
-                  on: { change: _vm.onFileChange }
-                }),
-                _vm._v(" "),
-                _vm.preview
-                  ? _c("output", { staticClass: "p-outputImg" }, [
-                      _c("img", {
-                        staticClass: "p-outputImg__img",
-                        attrs: { src: _vm.preview }
-                      })
-                    ])
-                  : _vm._e()
-              ]),
+              _c(
+                "label",
+                {
+                  staticClass: "p-fileContainer__airDrop",
+                  class: { "p-fileContainer__airDrop--active": this.preview }
+                },
+                [
+                  _vm._v(
+                    "\n          " + _vm._s(_vm.img_message) + "\n          "
+                  ),
+                  _c("input", {
+                    staticClass: "p-dropImg",
+                    attrs: { type: "file", name: "image" },
+                    on: { change: _vm.onFileChange }
+                  }),
+                  _vm._v(" "),
+                  _vm.preview
+                    ? _c("output", { staticClass: "p-outputImg" }, [
+                        _c("img", {
+                          staticClass: "p-outputImg__img",
+                          attrs: { src: _vm.preview }
+                        })
+                      ])
+                    : _vm._e()
+                ]
+              ),
               _vm._v(" "),
               _vm.errors
                 ? _c(
@@ -9300,8 +9361,11 @@ var render = function() {
           _vm._v(" "),
           _c(
             "button",
-            { staticClass: "c-btnEntry c-btn", attrs: { type: "submit" } },
-            [_vm._v("子STEP登録へ→")]
+            {
+              staticClass: "c-btnEntry c-btn p-btnEntry",
+              attrs: { type: "submit" }
+            },
+            [_vm._v("\n        子STEP登録へ→\n      ")]
           )
         ]
       )
@@ -9477,7 +9541,15 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "c-step p-step" }, [
-    _c("img", { staticClass: "c-step__img", attrs: { src: _vm.item.image } }),
+    _vm.item.image !== null
+      ? _c("img", {
+          staticClass: "c-step__img",
+          attrs: { src: _vm.item.image }
+        })
+      : _c("img", {
+          staticClass: "c-step__img",
+          attrs: { src: "images/no_image.png", alt: "" }
+        }),
     _vm._v(" "),
     _c(
       "div",
@@ -9509,10 +9581,15 @@ var render = function() {
     _vm._v(" "),
     _c("div", { staticClass: "c-step__wrap p-step__wrap" }, [
       _c("div", { staticClass: "c-faceicon" }, [
-        _c("img", {
-          staticClass: "c-faceicon__img",
-          attrs: { src: _vm.item.user.image }
-        })
+        _vm.item.user.image !== null
+          ? _c("img", {
+              staticClass: "c-faceicon__img",
+              attrs: { src: _vm.item.user.image }
+            })
+          : _c("img", {
+              staticClass: "c-faceicon__img",
+              attrs: { src: "images/icon.png" }
+            })
       ]),
       _vm._v(" "),
       _c("span", { staticClass: "c-stepTitle" }, [
@@ -9593,10 +9670,15 @@ var render = function() {
         ]),
         _vm._v(" "),
         _c("div", { staticClass: "p-detailImage" }, [
-          _c("img", {
-            staticClass: "p-detailImage__img",
-            attrs: { src: _vm.step.image, alt: "" }
-          })
+          _vm.step.image !== null
+            ? _c("img", {
+                staticClass: "p-detailImage__img",
+                attrs: { src: _vm.step.image, alt: "" }
+              })
+            : _c("img", {
+                staticClass: "p-detailImage__img",
+                attrs: { src: "/images/no_image.png", alt: "" }
+              })
         ]),
         _vm._v(" "),
         _vm._l(_vm.childs, function(child) {
@@ -9632,9 +9714,10 @@ var render = function() {
                 "button",
                 {
                   staticClass: "c-btn p-btnContainer__edit",
+                  attrs: { type: "submit" },
                   on: { click: _vm.edit }
                 },
-                [_vm._v("編集")]
+                [_vm._v("\n        編集\n      ")]
               )
             ])
           : _c(

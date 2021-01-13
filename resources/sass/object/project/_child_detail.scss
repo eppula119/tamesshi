@@ -58,9 +58,25 @@
   .p-clearBtn {
     background-color: $color_sub;
     color: $color_light100;
+    border: solid 1px $color_main;
+    transition:all 0.3s;
     margin-bottom: $space_4l;
     padding: $space_3l $space_xl;
     margin-top: $space_6l;
+    box-shadow: 0 0 10px rgba(0, 0, 0, .2);
+    outline: none;
+    transition:box-shadow 0.06s;
+  }
+  .p-clearBtn:hover {
+    background-color: $color_light100;
+    color: $color_main;
+    border: solid 1px $color_main;
+    transition: 0.3s;
+  }
+  .p-clearBtn:active {
+    background-color: $color_light100;
+    transform: translate3d(0, 5px, 0);
+    box-shadow: none;
   }
   .p-snsBtn {
     background-color: $color_light100;
@@ -72,14 +88,34 @@
     box-sizing: border-box;
     letter-spacing: 1px;
     margin-bottom: $space_xl;
+    transition: 0.3s;
   }
-  .p-nextBtn {
-    float: right;
+  .p-snsBtn:hover {
+    font-size: $font-size_xs;
+    background-color: $color_sub;
     color: $color_light100;
-    padding: $space_s $space_l;
+    letter-spacing: 3px;
+    transition: 0.3s;
+  }
+  .p-nextBtn, .p-preBtn {
+    font-size: $font-size_default;
+    color: $color_light100;
+    padding: $space_m $space_xl;
     border-radius: 10px;
+    border: solid 1px $color_main;
+    box-shadow: none;
+    transition: 0.3s;
     @include mq('sp') {
       width: 100%;
     }
+  }
+  .p-nextBtn:hover, .p-preBtn:hover {
+    background-color: $color_light100;
+    color: $color_main;
+    border: solid 1px $color_main;
+    transition: 0.3s;
+  }
+  .p-nextBtn {
+    float: right;
   }
 }

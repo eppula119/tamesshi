@@ -6,7 +6,11 @@
       <form class="p-registerProfile" @submit.prevent="submit">
         <div class="p-fileContainer">
           <label class="p-fileContainer__airDrop"
-            ><i class="fas fa-user p-userIcon"></i>ドラッグ＆ドロップ
+            ><i
+              class="fas fa-user p-userIcon"
+              :class="{ 'p-userIcon--active': this.preview }"
+            ></i
+            >{{ img_message }}
             <input
               type="file"
               class="p-dropImg"
@@ -100,6 +104,7 @@ export default {
         profile: [],
         email: [],
       },
+      img_message: "ドラッグ＆ドロップ",
     };
   },
   computed: {
@@ -145,12 +150,14 @@ export default {
 
       // データURL形式で受け取ったファイルを読み込む
       reader.readAsDataURL(event.target.files[0]);
+      this.img_message = "";
       this.image = event.target.files[0];
     },
     // 入力欄の値とプレビュー表示をクリアするメソッド
     reset() {
       this.preview = "";
       this.image = "";
+      this.img_message = "ドラッグ＆ドロップ";
       this.$el.querySelector('input[type="file"]').value = null;
     },
     // 更新する
@@ -219,6 +226,9 @@ export default {
       this.profile = this.user.profile;
       this.preview = this.user.image;
       this.email = this.user.email;
+      if (this.preview) {
+        this.img_message = "";
+      }
 
       // 通信成功時、stepストアに子STEPを全てセット
       // this.$store.dispatch("step/setSteps", response.data.step);

@@ -38,8 +38,11 @@
 
         <p class="p-registerStep__heading">画像 (任意)</p>
         <div class="p-fileContainer c-imgContainer--backgroundWhite">
-          <label class="p-fileContainer__airDrop">
-            ドラッグ＆ドロップ
+          <label
+            class="p-fileContainer__airDrop"
+            :class="{ 'p-fileContainer__airDrop--active': this.preview }"
+          >
+            {{ img_message }}
             <input
               type="file"
               class="p-dropImg"
@@ -105,7 +108,9 @@
             </ul>
           </span>
         </div>
-        <button type="submit" class="c-btnEntry c-btn">子STEP登録へ→</button>
+        <button type="submit" class="c-btnEntry c-btn p-btnEntry">
+          子STEP登録へ→
+        </button>
       </form>
     </div>
   </main>
@@ -132,6 +137,7 @@ export default {
         time: [],
       },
       categorys: {},
+      img_message: "ドラッグ＆ドロップ",
     };
   },
   computed: {
@@ -173,11 +179,13 @@ export default {
       // データURL形式で受け取ったファイルを読み込む
       reader.readAsDataURL(event.target.files[0]);
       this.image = event.target.files[0];
+      this.img_message = "";
     },
     // 入力欄の値とプレビュー表示をクリアするメソッド
     reset() {
       this.preview = "";
       this.image = "";
+      this.img_message = "ドラッグ＆ドロップ";
       this.$el.querySelector('input[type="file"]').value = null;
     },
     async submit() {

@@ -137,17 +137,26 @@
 .p-btnChallenge {
   background-color: $color_sub;
   color: $color_light100;
+  border: solid 1px $color_main;
+  transition:all 0.3s;
   margin-bottom: $space_4l;
   padding: $space_3l $space_xl;
   margin-top: $space_6l;
-  box-shadow: 0 0 10px rgba(0, 0, 0, .4);
+  box-shadow: 0 0 10px rgba(0, 0, 0, .2);
   outline: none;
-  transition-duration: 0.06s;
+  transition:box-shadow 0.06s;
 }
 .p-btnChallenge:active {
-  transform: translate3d(0, 5px, 0);
-  box-shadow: none;
-  outline: none;
+  background-color: $color_light100;
+  color: $color_main;
+  border: solid 1px $color_main;
+  transition: 0.3s;
+}
+.p-btnChallenge:hover {
+  background-color: $color_light100;
+  color: $color_main;
+  border: solid 1px $color_main;
+  transition: 0.3s;
 }
 .p-snsBtn {
   background-color: $color_light100;
@@ -158,5 +167,14 @@
   padding: 8px;
   box-sizing: border-box;
   letter-spacing: 1px;
+  margin-bottom: $space_xl;
+  transition: 0.3s;
 }
+.p-snsBtn:hover {
+  font-size: $font-size_xs;
+  background-color: $color_sub;
+  color: $color_light100;
+  letter-spacing: 3px;
+  transition: 0.3s;
+  }
 

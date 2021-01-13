@@ -33,7 +33,7 @@
         <button type="submit" class="c-btn p-snsBtn" @click="twitterShare">
           <i class="fab fa-twitter"></i>Twitterでシェアする
         </button>
-        <button type="submit" class="c-btn p-nextBtn" @click.prevent="onPrev">
+        <button type="submit" class="c-btn p-preBtn" @click.prevent="onPrev">
           →STEP1へ
         </button>
         <button type="submit" class="c-btn p-nextBtn" @click.prevent="onNext">

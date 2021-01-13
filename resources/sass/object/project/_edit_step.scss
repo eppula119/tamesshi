@@ -4,35 +4,64 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  margin-bottom: $space_l;
+  padding-top: $space_xl;
+  box-sizing: border-box;
   &__delete, &__back, &__next {
-    background-color: $color_dark075;
+    font-size: $font-size_default;
     color: $color_light100;
-     display: inline-block;
-    width: 40%;
-    border-radius: 6px;
+    padding: $space_m $space_xl;
+    border-radius: 10px;
+    background-color: $color_main;
+    border: solid 1px $color_light100;
+    box-shadow: none;
+    transition: 0.3s;
     @include mq() {
       margin-top: $space_l;
       padding: 0;
       height: 40px;
     }
   }
+  &__back:hover, &__next:hover {
+    background-color: $color_light100;
+    color: $color_main;
+    border: solid 1px $color_main;
+    transition: 0.3s;
+  }
   &__edit {
   width: 100%;
   background-color: $color_sub;
   color: $color_light100;
+  border: solid 1px $color_sub;
+  transition:all 0.3s;
   margin-bottom: $space_4l;
   padding: $space_3l $space_xl;
   margin-top: $space_6l;
-  box-shadow: 0 0 10px rgba(0, 0, 0, .4);
+  box-shadow: 0 0 10px rgba(0, 0, 0, .2);
   outline: none;
-  transition-duration: 0.06s;
+  transition:box-shadow 0.06s;
   }
   &__edit:active {
-  transform: translate3d(0, 5px, 0);
-  box-shadow: none;
-  outline: none;
-}
+  background-color: $color_light100;
+  color: $color_main;
+  border: solid 1px $color_main;
+  transition: 0.3s;
+  }
+  &__edit:hover {
+    background-color: $color_light100;
+    color: $color_main;
+    border: solid 1px $color_main;
+    transition: 0.3s;
+  }
 }
 .p-linkMypage {
+  display: inline-block;
+  margin-top: $space_s;
   border-radius: 6px;
+  text-decoration: none;
+  color: $color_dark100;
+}
+.p-linkMypage:hover {
+  text-decoration: none;
+  color: $color_light100;
 }

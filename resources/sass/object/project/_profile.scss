@@ -36,6 +36,9 @@
         opacity: 0.1;
         font-size: $font-size_9l;
       }
+      .p-userIcon--active {
+        opacity: 0;
+      }
       .p-dropImg {
         opacity: 0;
         display: inline-block;

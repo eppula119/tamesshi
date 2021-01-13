@@ -1,6 +1,7 @@
 <template>
   <div class="c-step p-step">
-    <img :src="item.image" class="c-step__img" />
+    <img :src="item.image" class="c-step__img" v-if="item.image !== null" />
+    <img src="images/no_image.png" alt class="c-step__img" v-else />
 
     <div class="c-itemCover">
       <RouterLink
@@ -15,7 +16,12 @@
 
     <div class="c-step__wrap p-step__wrap">
       <div class="c-faceicon">
-        <img :src="item.user.image" class="c-faceicon__img" />
+        <img
+          :src="item.user.image"
+          class="c-faceicon__img"
+          v-if="item.user.image !== null"
+        />
+        <img src="images/icon.png" class="c-faceicon__img" v-else />
       </div>
       <span class="c-stepTitle">{{ item.title }}</span>
       <div class="c-indexContainer">

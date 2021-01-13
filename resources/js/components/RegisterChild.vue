@@ -41,8 +41,11 @@
 
           <p class="p-childForm__heading">子STEP1:画像</p>
           <div class="p-fileContainer">
-            <label class="p-fileContainer__airDrop">
-              ドラッグ＆ドロップ
+            <label
+              class="p-fileContainer__airDrop"
+              :class="{ 'p-fileContainer__airDrop--active': this.preview }"
+            >
+              {{ img_message }}
               <input
                 type="file"
                 class="p-dropImg"
@@ -85,19 +88,27 @@
             </span>
           </div>
         </div>
-        <button type="submit" class="c-btnEntry c-btn c-btn--white">
+        <button type="submit" class="c-btnEntry c-btn c-btn--white p-btnEntry">
           登録して次の子STEPへ→
         </button>
         <div class="p-btnContainer" v-show="filterChilds.length !== 0">
-          <button class="p-btnContainer__back" @click.prevent="onPrev">
+          <button
+            type="submit"
+            class="p-btnContainer__back"
+            @click.prevent="onPrev"
+          >
             ←前の子ステップへ
           </button>
-          <button class="p-btnContainer__next" @click.prevent="onNext">
+          <button
+            type="submit"
+            class="p-btnContainer__next"
+            @click.prevent="onNext"
+          >
             次の子ステップへ→
           </button>
         </div>
         <RouterLink class="p-linkMypage" :to="`/mypage`"
-          >マイページへ
+          >←マイページへ
         </RouterLink>
       </form>
     </div>
@@ -124,6 +135,7 @@ export default {
         content: [],
         time: [],
       },
+      img_message: "ドラッグ＆ドロップ", // 画像アップロード注意書き
       page: 1, //　現在の子STEP番号
       perPage, // 表示する子STEP件数
       totalPage: null, // 総ページ数
@@ -156,17 +168,13 @@ export default {
     onFileChange(event) {
       // 何も選択されていなかったら処理中断
       if (event.target.files.length === 0) {
-        this.preview = "";
-        this.image = "";
-        this.$el.querySelector('input[type="file"]').value = null;
+        this.reset();
         return false;
       }
       // ファイルが画像ではなかったら処理中断
       if (!event.target.files[0].type.match("image.*")) {
         this.errors.image = ["ファイル形式が画像タイプではありません"];
-        this.preview = "";
-        this.image = "";
-        this.$el.querySelector('input[type="file"]').value = null;
+        this.reset();
         return false;
       }
       // FileReaderクラスのインスタンスを取得
@@ -178,6 +186,7 @@ export default {
       };
       // データURL形式で受け取ったファイルを読み込む
       reader.readAsDataURL(event.target.files[0]);
+      this.img_message = "";
       this.image = event.target.files[0];
     },
     // 入力欄の値とプレビュー表示をクリアするメソッド
@@ -187,6 +196,7 @@ export default {
       this.image = "";
       this.content = "";
       this.time = "";
+      this.img_message = "ドラッグ＆ドロップ";
       this.$el.querySelector('input[type="file"]').value = null;
     },
     async submit() {

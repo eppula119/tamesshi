@@ -257,28 +257,30 @@ class StepController extends Controller
         $file_name = "";
 
         if(!empty($request['image'])) {
-       		$image = $request['image'];
-					$path = Storage::disk('s3')->put('/', $image, 'public');
-					$step['image'] = Storage::disk('s3')->url($path);
-				}
-				\Debugbar::info("DBへ保存");
+          $image = $request['image'];
+          $path = Storage::disk('s3')->put('/', $image, 'public');
+          $step['image'] = Storage::disk('s3')->url($path);
+        }else {
+          $step['image'] = $request['image'];
+        }
+          \Debugbar::info("DBへ保存");
 
-				$step->title = $request->title;
-				\Debugbar::info("タイトル完了");
-				$step->content = $request->content;
-				\Debugbar::info("内容完了");
-				\Debugbar::info("カテゴリーリクエストの中身");
-				\Debugbar::info($request->category);
-				$step->category_id = $request->category;
-				\Debugbar::info("カテゴリー完了");
-				$step->time = $request->time;
-				\Debugbar::info("時間完了");
-				$step->user_id = $user_id;
-					\Debugbar::info("ユーザーID完了");
-        $step->save();
-        return response()->json(['step_id' => $step->id, 'state' => 'NY'], 201);
-        
-        Log::debug("新規でバック終わり");
+          $step->title = $request->title;
+          \Debugbar::info("タイトル完了");
+          $step->content = $request->content;
+          \Debugbar::info("内容完了");
+          \Debugbar::info("カテゴリーリクエストの中身");
+          \Debugbar::info($request->category);
+          $step->category_id = $request->category;
+          \Debugbar::info("カテゴリー完了");
+          $step->time = $request->time;
+          \Debugbar::info("時間完了");
+          $step->user_id = $user_id;
+          \Debugbar::info("ユーザーID完了");
+          $step->save();
+          return response()->json(['step_id' => $step->id, 'state' => 'NY'], 201);
+          
+          Log::debug("新規でバック終わり");
 
         
     }
@@ -308,6 +310,8 @@ class StepController extends Controller
         	$image = $request['image'];
 					$path = Storage::disk('s3')->put('/', $image, 'public');
 					$step['image'] = Storage::disk('s3')->url($path);
+        }else {
+          $step['image'] = $request['image'];
         }
 
         $step->title = $request->title;
@@ -347,13 +351,11 @@ class StepController extends Controller
         
 
         if(!empty($request['image'])){ // 画像が編集されている場合、新しく登録
-            Log::debug('画像が編集されているため新しいファイル名作成！');
-            $file_name = "";
-            // ファイルの名前をタイムスタンプに付与し、ファイル名を作成。
-            $file_name = time() . '.' . $request['image']->getClientOriginalName();
-            $request['image']->storeAs('public', $file_name);
-            // プロジェクト内にファイルを保存
-            $step['image'] = '/storage/' . $file_name;
+          $image = $request['image'];
+					$path = Storage::disk('s3')->put('/', $image, 'public');
+					$step['image'] = Storage::disk('s3')->url($path);
+        }else {
+          $step['image'] = $request['image'];
         }
         
         $step->title = $request->title;
@@ -396,7 +398,8 @@ class StepController extends Controller
 					$image = $request['image'];
 					$path = Storage::disk('s3')->put('/', $image, 'public');
 					$step['image'] = Storage::disk('s3')->url($path);
-
+        }else {
+          $step['image'] = $request['image'];
         }
         
         $step->title = $request->title;
@@ -446,11 +449,11 @@ class StepController extends Controller
 
         if(!empty($request['image'])){ // 画像が編集されている場合、新しく登録
             Log::debug('画像が編集されているため新しいファイル名作成！');
-            
-
             $image = $request['image'];
             $path = Storage::disk('s3')->put('/', $image, 'public');
             $user['image'] = Storage::disk('s3')->url($path);
+        }else {
+          $user['image'] = $request['image'];
         }
         
         $user->profile = $request->profile;

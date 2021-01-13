@@ -41,6 +41,10 @@ export default {
       favorites_by_user: true,
     };
   },
+  mounted() {
+    console.log("fetchSteps発動");
+    this.fetchSteps();
+  },
   methods: {
     // 全てのアイディアを取得
     async fetchSteps() {
@@ -88,15 +92,15 @@ export default {
     },
   },
   watch: {
-    $route: {
-      async handler(to, from) {
-        console.log(from);
-        console.log("$routeが変わった");
-        await this.fetchSteps(); // api通信開始メソッド実行
-        console.log(to);
-      },
-      immediate: true, // 起動時にも実行
-    },
+    // $route: {
+    //   async handler(to, from) {
+    //     console.log(from);
+    //     console.log("$routeが変わった");
+    //     await this.fetchSteps(); // api通信開始メソッド実行
+    //     console.log(to);
+    //   },
+    //   immediate: true, // 起動時にも実行
+    // },
   },
 };
 </script>

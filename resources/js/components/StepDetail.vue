@@ -22,7 +22,13 @@
       </div>
       <!-- --------------------------------- 画像部分 -------------------------------- -->
       <div class="p-detailImage">
-        <img :src="step.image" alt class="p-detailImage__img" />
+        <img
+          :src="step.image"
+          alt
+          class="p-detailImage__img"
+          v-if="step.image !== null"
+        />
+        <img src="/images/no_image.png" alt class="p-detailImage__img" v-else />
       </div>
       <!-- --------------------------------- 子STEP一覧部分 -------------------------------- -->
 
@@ -34,7 +40,9 @@
       </div>
       <!-- ---------------------------------ボタン部分 -------------------------------- -->
       <div class="p-btnContainer" v-if="myStep">
-        <button class="c-btn p-btnContainer__edit" @click="edit">編集</button>
+        <button type="submit" class="c-btn p-btnContainer__edit" @click="edit">
+          編集
+        </button>
       </div>
       <button
         type="submit"
@@ -75,7 +83,7 @@ export default {
         favorites_by_user: false,
       },
       myStep: false,
-      favFlg: false,
+      favFlg: "",
     };
   },
   computed: {
@@ -111,6 +119,11 @@ export default {
         // ログインユーザーが登録したSTEPは判定
         this.myStep = true;
       }
+      if (response.data.step.favorited_by_user === true) {
+        this.favFlg = true;
+      } else {
+        this.favFlg = false;
+      }
     },
     onFavoriteClick() {
       if (!this.isLogin) {
@@ -121,9 +134,11 @@ export default {
       if (this.step.favorited_by_user) {
         this.favFlg = false;
         this.unfavorite();
+        console.log("いいね！");
       } else {
         this.favFlg = true;
         this.favorite();
+        console.log("いいね削除");
       }
     },
     // 気になるリスト登録
