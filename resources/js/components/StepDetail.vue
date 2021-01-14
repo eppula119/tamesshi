@@ -112,7 +112,6 @@ export default {
       console.log(response.data.child);
       this.step = response.data.step;
       // 通信成功時、stepストアに子STEPを全てセット
-      this.$store.dispatch("step/setSteps", response.data.step);
       this.$store.dispatch("step/setChildSteps", response.data.child);
 
       if (this.user.id === this.step.user_id) {

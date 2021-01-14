@@ -4861,8 +4861,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
                 console.log(response.data.child);
                 _this.step = response.data.step; // 通信成功時、stepストアに子STEPを全てセット
 
-                _this.$store.dispatch("step/setSteps", response.data.step);
-
                 _this.$store.dispatch("step/setChildSteps", response.data.child);
 
                 if (_this.user.id === _this.step.user_id) {
@@ -4876,7 +4874,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
                   _this.favFlg = false;
                 }
 
-              case 16:
+              case 15:
               case "end":
                 return _context.stop();
             }
@@ -5139,10 +5137,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       favorites_by_user: true
     };
   },
-  mounted: function mounted() {
-    console.log("fetchSteps発動");
-    this.fetchSteps();
-  },
   methods: {
     // 全てのアイディアを取得
     fetchSteps: function fetchSteps() {
@@ -5154,16 +5148,17 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
-                _context.next = 2;
+                console.log("fetchSteps実行");
+                _context.next = 3;
                 return axios.get("/api/step_list");
 
-              case 2:
+              case 3:
                 response = _context.sent;
                 console.log("画面表示後、response.dataの中身");
                 console.log(response.data); //　レスポンスエラーの場合エラーstateにstatusをセット
 
                 if (!(response.status !== _util__WEBPACK_IMPORTED_MODULE_1__["OK"])) {
-                  _context.next = 8;
+                  _context.next = 9;
                   break;
                 }
 
@@ -5171,11 +5166,11 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
                 return _context.abrupt("return", false);
 
-              case 8:
+              case 9:
                 // 通信成功時、stepストアにアイディア全てセット
                 _this.$store.dispatch("step/setSteps", response.data);
 
-              case 9:
+              case 10:
               case "end":
                 return _context.stop();
             }
@@ -5198,6 +5193,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     //　表示したデータを取得。1〜6、7〜12、13〜18...の6ごとのデータを取得
     filtered: function filtered() {
       var list = [];
+      console.log("this.filteredStepsのなかみ");
+      console.log(this.filteredSteps);
 
       if (this.filteredSteps) {
         list = this.filteredSteps.concat();
@@ -5215,15 +5212,30 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       return list;
     }
   }),
-  watch: {// $route: {
-    //   async handler(to, from) {
-    //     console.log(from);
-    //     console.log("$routeが変わった");
-    //     await this.fetchSteps(); // api通信開始メソッド実行
-    //     console.log(to);
-    //   },
-    //   immediate: true, // 起動時にも実行
-    // },
+  watch: {
+    $route: {
+      handler: function handler(to, from) {
+        var _this2 = this;
+
+        return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2() {
+          return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
+            while (1) {
+              switch (_context2.prev = _context2.next) {
+                case 0:
+                  _context2.next = 2;
+                  return _this2.fetchSteps();
+
+                case 2:
+                case "end":
+                  return _context2.stop();
+              }
+            }
+          }, _callee2);
+        }))();
+      },
+      immediate: true // 起動時にも実行
+
+    }
   }
 });
 

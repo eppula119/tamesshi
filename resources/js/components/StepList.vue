@@ -41,13 +41,10 @@ export default {
       favorites_by_user: true,
     };
   },
-  mounted() {
-    console.log("fetchSteps発動");
-    this.fetchSteps();
-  },
   methods: {
     // 全てのアイディアを取得
     async fetchSteps() {
+      console.log("fetchSteps実行");
       const response = await axios.get("/api/step_list");
       console.log("画面表示後、response.dataの中身");
       console.log(response.data);
@@ -76,6 +73,8 @@ export default {
     //　表示したデータを取得。1〜6、7〜12、13〜18...の6ごとのデータを取得
     filtered() {
       let list = [];
+      console.log("this.filteredStepsのなかみ");
+      console.log(this.filteredSteps);
       if (this.filteredSteps) {
         list = this.filteredSteps.concat();
       } else {
@@ -92,15 +91,12 @@ export default {
     },
   },
   watch: {
-    // $route: {
-    //   async handler(to, from) {
-    //     console.log(from);
-    //     console.log("$routeが変わった");
-    //     await this.fetchSteps(); // api通信開始メソッド実行
-    //     console.log(to);
-    //   },
-    //   immediate: true, // 起動時にも実行
-    // },
+    $route: {
+      async handler(to, from) {
+        await this.fetchSteps(); // api通信開始メソッド実行
+      },
+      immediate: true, // 起動時にも実行
+    },
   },
 };
 </script>
