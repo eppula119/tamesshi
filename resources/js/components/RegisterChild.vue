@@ -2,11 +2,11 @@
   <!--ーーーーーーーーーーーーーーーーーー 子STEP投稿画面表示 ーーーーーーーーーーーーーーーーーー-->
   <main class="l-main">
     <div class="l-bg p-stepForm">
-      <p class="p-stepForm__title">猿でも分かる英会話</p>
+      <p class="p-stepForm__title">{{ step.title }}</p>
 
       <form class="p-registerStep" @submit.prevent="submit">
         <div class="p-childForm">
-          <p class="p-childForm__heading">子STEP1:タイトル</p>
+          <p class="p-childForm__heading">子STEP{{ page }}:タイトル</p>
           <input
             type="text"
             name="title"
@@ -22,7 +22,7 @@
             </ul>
           </span>
 
-          <p class="p-childForm__heading">子STEP1:内容</p>
+          <p class="p-childForm__heading">子STEP{{ page }}1:内容</p>
           <textarea
             class="p-childForm__content"
             name="content"
@@ -39,7 +39,7 @@
             </ul>
           </span>
 
-          <p class="p-childForm__heading">子STEP1:画像</p>
+          <p class="p-childForm__heading">子STEP{{ page }}:画像</p>
           <div class="p-fileContainer">
             <label
               class="p-fileContainer__airDrop"
@@ -70,7 +70,9 @@
             </span>
           </div>
 
-          <p class="p-childForm__heading">子STEP1:目標時間(単位：時間)</p>
+          <p class="p-childForm__heading">
+            子STEP{{ page }}:目標時間(単位：時間)
+          </p>
           <div class="p-childForm__time">
             <input
               type="number"
@@ -146,6 +148,7 @@ export default {
     // stepストアのstepsを参照
     ...mapState({
       childs: (state) => state.step.childSteps,
+      step: (state) => state.step.step,
     }),
     filterChilds() {
       // 閲覧画面に表示させる子STEPを表示。(次の子STEP遷移機能)

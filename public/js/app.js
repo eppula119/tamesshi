@@ -2553,20 +2553,17 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       var _this2 = this;
 
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2() {
-        var $steps;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
           while (1) {
             switch (_context2.prev = _context2.next) {
               case 0:
-                // 編集ではなくSTEP新規登録のため、stepストアを空にする
-                $steps = [];
-                _context2.next = 3;
-                return _this2.$store.commit("step/setSteps", $steps);
+                _context2.next = 2;
+                return _this2.$store.commit("step/setStep", "");
 
-              case 3:
+              case 2:
                 _this2.$router.push("/register_step");
 
-              case 4:
+              case 3:
               case "end":
                 return _context2.stop();
             }
@@ -3856,6 +3853,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -3890,6 +3889,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   computed: _objectSpread(_objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_2__["mapState"])({
     childs: function childs(state) {
       return state.step.childSteps;
+    },
+    step: function step(state) {
+      return state.step.step;
     }
   })), {}, {
     filterChilds: function filterChilds() {
@@ -4284,8 +4286,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     };
   },
   computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_2__["mapState"])({
-    steps: function steps(state) {
-      return state.step.steps;
+    step: function step(state) {
+      return state.step.step;
     }
   })),
   methods: {
@@ -4348,16 +4350,16 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
                 formData.append("category", _this2.category_id);
                 formData.append("time", _this2.time);
 
-                if (!(_this2.steps.length !== 0)) {
+                if (!_this2.step) {
                   _context.next = 16;
                   break;
                 }
 
                 // 編集の場合
-                console.log(_this2.steps);
+                console.log(_this2.step);
                 console.log("編集API通信開始！");
                 _context.next = 13;
-                return axios.post("/api/update_step/".concat(_this2.steps.id), formData);
+                return axios.post("/api/update_step/".concat(_this2.step.id), formData);
 
               case 13:
                 response = _context.sent;
@@ -4447,15 +4449,13 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         self.categorys = response.data["category"];
       });
 
-      if (this.steps.length !== 0) {
-        console.log("編集画面表示中"); // reader.readAsDataURL(event.target.files[0]);
-        // this.image = event.target.files[0];
-
-        this.title = this.steps.title;
-        this.content = this.steps.content;
-        this.preview = this.steps.image;
-        this.category_id = this.steps.category_id;
-        this.time = this.steps.time;
+      if (this.step) {
+        console.log("編集画面表示中");
+        this.title = this.step.title;
+        this.content = this.step.content;
+        this.preview = this.step.image;
+        this.category_id = this.step.category_id;
+        this.time = this.step.time;
       } else {
         console.log("新規画面表示中");
       }
@@ -4861,6 +4861,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
                 console.log(response.data.child);
                 _this.step = response.data.step; // 通信成功時、stepストアに子STEPを全てセット
 
+                _this.$store.dispatch("step/setStep", response.data.step);
+
                 _this.$store.dispatch("step/setChildSteps", response.data.child);
 
                 if (_this.user.id === _this.step.user_id) {
@@ -4874,7 +4876,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
                   _this.favFlg = false;
                 }
 
-              case 15:
+              case 16:
               case "end":
                 return _context.stop();
             }
@@ -7305,7 +7307,9 @@ var render = function() {
         _vm._l(_vm.filterChilds, function(item, i) {
           return _c("div", { key: i, staticClass: "p-childContainer" }, [
             _c("div", { staticClass: "p-childContainer__index" }, [
-              _c("span", { staticClass: "p-childTitle" }, [_vm._v("STEP:1")]),
+              _c("span", { staticClass: "p-childTitle" }, [
+                _vm._v("STEP:" + _vm._s(_vm.page))
+              ]),
               _vm._v(" "),
               _c("span", { staticClass: "p-childTime" }, [
                 _vm._v("目標時間：" + _vm._s(item.time) + "分")
@@ -7322,12 +7326,26 @@ var render = function() {
               ])
             ]),
             _vm._v(" "),
-            _c("div", { staticClass: "p-childContainer__img" }, [
-              _c("img", {
-                staticClass: "p-childImage",
-                attrs: { src: item.image, alt: "" }
-              })
-            ]),
+            _c(
+              "div",
+              {
+                directives: [
+                  {
+                    name: "show",
+                    rawName: "v-show",
+                    value: item.image,
+                    expression: "item.image"
+                  }
+                ],
+                staticClass: "p-childContainer__img"
+              },
+              [
+                _c("img", {
+                  staticClass: "p-childImage",
+                  attrs: { src: item.image, alt: "" }
+                })
+              ]
+            ),
             _vm._v(" "),
             _c(
               "button",
@@ -7368,7 +7386,7 @@ var render = function() {
                   }
                 }
               },
-              [_vm._v("\n        →STEP1へ\n      ")]
+              [_vm._v("\n        →前のSTEPへ\n      ")]
             ),
             _vm._v(" "),
             _c(
@@ -7383,7 +7401,7 @@ var render = function() {
                   }
                 }
               },
-              [_vm._v("\n        →STEP2へ\n      ")]
+              [_vm._v("\n        →次のSTEPへ\n      ")]
             )
           ])
         })
@@ -8728,7 +8746,7 @@ var render = function() {
   return _c("main", { staticClass: "l-main" }, [
     _c("div", { staticClass: "l-bg p-stepForm" }, [
       _c("p", { staticClass: "p-stepForm__title" }, [
-        _vm._v("猿でも分かる英会話")
+        _vm._v(_vm._s(_vm.step.title))
       ]),
       _vm._v(" "),
       _c(
@@ -8745,7 +8763,7 @@ var render = function() {
         [
           _c("div", { staticClass: "p-childForm" }, [
             _c("p", { staticClass: "p-childForm__heading" }, [
-              _vm._v("子STEP1:タイトル")
+              _vm._v("子STEP" + _vm._s(_vm.page) + ":タイトル")
             ]),
             _vm._v(" "),
             _c("input", {
@@ -8798,7 +8816,7 @@ var render = function() {
               : _vm._e(),
             _vm._v(" "),
             _c("p", { staticClass: "p-childForm__heading" }, [
-              _vm._v("子STEP1:内容")
+              _vm._v("子STEP" + _vm._s(_vm.page) + "1:内容")
             ]),
             _vm._v(" "),
             _c("textarea", {
@@ -8856,7 +8874,7 @@ var render = function() {
               : _vm._e(),
             _vm._v(" "),
             _c("p", { staticClass: "p-childForm__heading" }, [
-              _vm._v("子STEP1:画像")
+              _vm._v("子STEP" + _vm._s(_vm.page) + ":画像")
             ]),
             _vm._v(" "),
             _c("div", { staticClass: "p-fileContainer" }, [
@@ -8918,7 +8936,11 @@ var render = function() {
             ]),
             _vm._v(" "),
             _c("p", { staticClass: "p-childForm__heading" }, [
-              _vm._v("子STEP1:目標時間(単位：時間)")
+              _vm._v(
+                "\n          子STEP" +
+                  _vm._s(_vm.page) +
+                  ":目標時間(単位：時間)\n        "
+              )
             ]),
             _vm._v(" "),
             _c("div", { staticClass: "p-childForm__time" }, [
@@ -28942,6 +28964,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 var state = {
   steps: [],
   childSteps: [],
+  step: "",
   favSteps: [],
   challengeSteps: [],
   filterQuery: {
@@ -29029,6 +29052,9 @@ var mutations = {
     state.childSteps = childs;
     console.log(state.childSteps);
   },
+  setStep: function setStep(state, step) {
+    state.step = step;
+  },
   setCategoryMenu: function setCategoryMenu(state, _boolean) {
     state.categoryMenu = _boolean;
   },
@@ -29111,14 +29137,14 @@ var actions = {
       }, _callee4);
     }))();
   },
-  // stateのcategoryMenu情報を更新
-  setCategoryMenu: function setCategoryMenu(context, _boolean3) {
+  // stateのstep情報を更新
+  setStep: function setStep(context, step) {
     return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee5() {
       return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee5$(_context5) {
         while (1) {
           switch (_context5.prev = _context5.next) {
             case 0:
-              context.commit('setCategoryMenu', _boolean3);
+              context.commit('setStep', step);
 
             case 1:
             case "end":
@@ -29128,14 +29154,14 @@ var actions = {
       }, _callee5);
     }))();
   },
-  // stateのheaderMenu情報を更新
-  setHeaderMenu: function setHeaderMenu(context, _boolean4) {
+  // stateのcategoryMenu情報を更新
+  setCategoryMenu: function setCategoryMenu(context, _boolean3) {
     return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee6() {
       return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee6$(_context6) {
         while (1) {
           switch (_context6.prev = _context6.next) {
             case 0:
-              context.commit('setHeaderMenu', _boolean4);
+              context.commit('setCategoryMenu', _boolean3);
 
             case 1:
             case "end":
@@ -29145,14 +29171,14 @@ var actions = {
       }, _callee6);
     }))();
   },
-  // stateのstep情報を更新
-  setFavSteps: function setFavSteps(context, steps) {
+  // stateのheaderMenu情報を更新
+  setHeaderMenu: function setHeaderMenu(context, _boolean4) {
     return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee7() {
       return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee7$(_context7) {
         while (1) {
           switch (_context7.prev = _context7.next) {
             case 0:
-              context.commit('setFavSteps', steps);
+              context.commit('setHeaderMenu', _boolean4);
 
             case 1:
             case "end":
@@ -29163,13 +29189,13 @@ var actions = {
     }))();
   },
   // stateのstep情報を更新
-  setChallengeSteps: function setChallengeSteps(context, steps) {
+  setFavSteps: function setFavSteps(context, steps) {
     return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee8() {
       return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee8$(_context8) {
         while (1) {
           switch (_context8.prev = _context8.next) {
             case 0:
-              context.commit('setChallengeSteps', steps);
+              context.commit('setFavSteps', steps);
 
             case 1:
             case "end":
@@ -29177,6 +29203,23 @@ var actions = {
           }
         }
       }, _callee8);
+    }))();
+  },
+  // stateのstep情報を更新
+  setChallengeSteps: function setChallengeSteps(context, steps) {
+    return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee9() {
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee9$(_context9) {
+        while (1) {
+          switch (_context9.prev = _context9.next) {
+            case 0:
+              context.commit('setChallengeSteps', steps);
+
+            case 1:
+            case "end":
+              return _context9.stop();
+          }
+        }
+      }, _callee9);
     }))();
   }
 };

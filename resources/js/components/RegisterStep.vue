@@ -143,7 +143,7 @@ export default {
   computed: {
     // stepストアのstepsを参照
     ...mapState({
-      steps: (state) => state.step.steps,
+      step: (state) => state.step.step,
     }),
   },
   methods: {
@@ -199,12 +199,12 @@ export default {
       formData.append("category", this.category_id);
       formData.append("time", this.time);
 
-      if (this.steps.length !== 0) {
+      if (this.step) {
         // 編集の場合
-        console.log(this.steps);
+        console.log(this.step);
         console.log("編集API通信開始！");
         response = await axios.post(
-          `/api/update_step/${this.steps.id}`,
+          `/api/update_step/${this.step.id}`,
           formData
         );
       } else {
@@ -261,15 +261,14 @@ export default {
         self.categorys = response.data["category"];
       });
 
-      if (this.steps.length !== 0) {
+      if (this.step) {
         console.log("編集画面表示中");
-        // reader.readAsDataURL(event.target.files[0]);
-        // this.image = event.target.files[0];
-        this.title = this.steps.title;
-        this.content = this.steps.content;
-        this.preview = this.steps.image;
-        this.category_id = this.steps.category_id;
-        this.time = this.steps.time;
+
+        this.title = this.step.title;
+        this.content = this.step.content;
+        this.preview = this.step.image;
+        this.category_id = this.step.category_id;
+        this.time = this.step.time;
       } else {
         console.log("新規画面表示中");
       }

@@ -3,6 +3,7 @@
 const state = {
   steps: [],
   childSteps: [],
+  step: "",
   favSteps: [],
   challengeSteps: [],
   filterQuery: {
@@ -89,6 +90,9 @@ const mutations = {
     state.childSteps = childs;
     console.log(state.childSteps);
   },
+  setStep(state, step) {
+    state.step = step;
+  },
   setCategoryMenu(state, boolean) {
     state.categoryMenu = boolean;
   },
@@ -121,6 +125,10 @@ const actions = {
   // stateのchildSteps情報を更新
   async setChildSteps(context, childs) {
     context.commit('setChildSteps', childs)
+  },
+  // stateのstep情報を更新
+  async setStep(context, step) {
+    context.commit('setStep', step)
   },
   // stateのcategoryMenu情報を更新
   async setCategoryMenu(context, boolean) {

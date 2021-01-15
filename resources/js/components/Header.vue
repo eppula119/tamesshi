@@ -117,8 +117,7 @@ export default {
     },
     async registerStep() {
       // 編集ではなくSTEP新規登録のため、stepストアを空にする
-      const $steps = [];
-      await this.$store.commit("step/setSteps", $steps);
+      await this.$store.commit("step/setStep", "");
       this.$router.push("/register_step");
     },
     searchTitle() {

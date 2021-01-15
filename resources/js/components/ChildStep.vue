@@ -9,7 +9,7 @@
         :key="i"
       >
         <div class="p-childContainer__index">
-          <span class="p-childTitle">STEP:1</span>
+          <span class="p-childTitle">STEP:{{ page }}</span>
           <span class="p-childTime">目標時間：{{ item.time }}分</span>
         </div>
         <p class="p-childContainer__title">{{ item.title }}</p>
@@ -18,7 +18,7 @@
           <span class="p-childContent">{{ item.content }}</span>
         </div>
         <!-- --------------------------------- 画像部分 -------------------------------- -->
-        <div class="p-childContainer__img">
+        <div class="p-childContainer__img" v-show="item.image">
           <img :src="item.image" alt class="p-childImage" />
         </div>
 
@@ -34,10 +34,10 @@
           <i class="fab fa-twitter"></i>Twitterでシェアする
         </button>
         <button type="submit" class="c-btn p-preBtn" @click.prevent="onPrev">
-          →STEP1へ
+          →前のSTEPへ
         </button>
         <button type="submit" class="c-btn p-nextBtn" @click.prevent="onNext">
-          →STEP2へ
+          →次のSTEPへ
         </button>
       </div>
     </div>
