@@ -834,6 +834,20 @@ button:not(:disabled) {
   }
 }
 
+.p-authForm__container .p-guestLogin {
+  width: 100%;
+}
+
+@media screen and (max-width: 767px) {
+  .p-authForm__container .p-guestLogin {
+    width: 80%;
+    display: block;
+    margin: 0 auto;
+    margin-top: 10px;
+    margin-bottom: 10px;
+  }
+}
+
 .p-authForm__container .p-authSns {
   width: 200%;
   padding-right: "-100px";

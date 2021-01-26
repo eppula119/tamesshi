@@ -2811,6 +2811,13 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -2937,41 +2944,30 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         }, _callee3);
       }))();
     },
-    clearError: function clearError() {
-      // エラーメッセージをクリア
-      this.$store.commit("auth/setLoginErrorMessages", null);
-      this.$store.commit("auth/setRegisterErrorMessages", null);
-      this.$store.commit("auth/setForgotErrorMessages", null);
-    },
-    changeForm: function changeForm() {
+    guestLogin: function guestLogin() {
       var _this4 = this;
 
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee4() {
+        var guestLoginForm;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee4$(_context4) {
           while (1) {
             switch (_context4.prev = _context4.next) {
               case 0:
-                if (!(_this4.tab === 1)) {
-                  _context4.next = 3;
-                  break;
-                }
-
-                // ログイン画面表示中の場合、ユーザー登録画面に切替
-                _this4.title = "ユーザー登録";
-                return _context4.abrupt("return", _this4.tab = 2);
+                guestLoginForm = {
+                  email: "hogehogetest7777@example.com",
+                  password: "hj34dg9t"
+                };
+                _context4.next = 3;
+                return _this4.$store.dispatch("auth/login", guestLoginForm);
 
               case 3:
-                if (!(_this4.tab === 2 || _this4.tab === 3)) {
-                  _context4.next = 7;
-                  break;
+                // authストアのloginアクションを呼び出す
+                if (_this4.apiStatus) {
+                  _this4.$router.push("/step_list"); // 通信成功したら、STEP一覧ページに移動する
+
                 }
 
-                // ユーザー登録画面またはパスワード再設定画面表示中の場合、ログイン画面に切替
-                console.log("ユーザー登録画面のため、ログイン画面へ");
-                _this4.title = "ログイン";
-                return _context4.abrupt("return", _this4.tab = 1);
-
-              case 7:
+              case 4:
               case "end":
                 return _context4.stop();
             }
@@ -2979,7 +2975,13 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         }, _callee4);
       }))();
     },
-    changeReminder: function changeReminder() {
+    clearError: function clearError() {
+      // エラーメッセージをクリア
+      this.$store.commit("auth/setLoginErrorMessages", null);
+      this.$store.commit("auth/setRegisterErrorMessages", null);
+      this.$store.commit("auth/setForgotErrorMessages", null);
+    },
+    changeForm: function changeForm() {
       var _this5 = this;
 
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee5() {
@@ -2987,17 +2989,53 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           while (1) {
             switch (_context5.prev = _context5.next) {
               case 0:
-                // パスワードリマインダー画面へ
-                console.log("パスワードリマインダー画面へ");
-                _this5.title = "パスワード再設定";
-                return _context5.abrupt("return", _this5.tab = 3);
+                if (!(_this5.tab === 1)) {
+                  _context5.next = 3;
+                  break;
+                }
+
+                // ログイン画面表示中の場合、ユーザー登録画面に切替
+                _this5.title = "ユーザー登録";
+                return _context5.abrupt("return", _this5.tab = 2);
 
               case 3:
+                if (!(_this5.tab === 2 || _this5.tab === 3)) {
+                  _context5.next = 7;
+                  break;
+                }
+
+                // ユーザー登録画面またはパスワード再設定画面表示中の場合、ログイン画面に切替
+                console.log("ユーザー登録画面のため、ログイン画面へ");
+                _this5.title = "ログイン";
+                return _context5.abrupt("return", _this5.tab = 1);
+
+              case 7:
               case "end":
                 return _context5.stop();
             }
           }
         }, _callee5);
+      }))();
+    },
+    changeReminder: function changeReminder() {
+      var _this6 = this;
+
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee6() {
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee6$(_context6) {
+          while (1) {
+            switch (_context6.prev = _context6.next) {
+              case 0:
+                // パスワードリマインダー画面へ
+                console.log("パスワードリマインダー画面へ");
+                _this6.title = "パスワード再設定";
+                return _context6.abrupt("return", _this6.tab = 3);
+
+              case 3:
+              case "end":
+                return _context6.stop();
+            }
+          }
+        }, _callee6);
       }))();
     }
   },
@@ -5259,7 +5297,6 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-//
 //
 //
 //
@@ -7919,6 +7956,28 @@ var render = function() {
         ),
         _vm._v(" "),
         _c(
+          "button",
+          {
+            directives: [
+              {
+                name: "show",
+                rawName: "v-show",
+                value: _vm.tab === 1,
+                expression: "tab === 1"
+              }
+            ],
+            staticClass: "c-btn c-btnAuth p-guestLogin",
+            on: {
+              click: function($event) {
+                $event.preventDefault()
+                return _vm.guestLogin($event)
+              }
+            }
+          },
+          [_vm._v("\n        ゲストユーザーでログイン\n      ")]
+        ),
+        _vm._v(" "),
+        _c(
           "span",
           {
             directives: [
@@ -9984,12 +10043,7 @@ var render = function() {
                   [_vm._v("お気に入り少ない順")]
                 )
               ]
-            ),
-            _vm._v(" "),
-            _c("input", {
-              staticClass: "p-searchBtn",
-              attrs: { type: "submit", placeholder: "検索" }
-            })
+            )
           ]
         )
       ])

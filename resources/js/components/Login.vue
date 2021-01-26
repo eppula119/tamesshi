@@ -62,6 +62,13 @@
 
           <input type="submit" class="c-btn c-btnAuth" value="ログイン" />
         </form>
+        <button
+          class="c-btn c-btnAuth p-guestLogin"
+          @click.prevent="guestLogin"
+          v-show="tab === 1"
+        >
+          ゲストユーザーでログイン
+        </button>
         <span class="p-registerLink" v-show="tab === 1">
           →
           <a href="#" class="p-registerLink__link" @click.prevent="changeForm"
@@ -232,6 +239,17 @@ export default {
         this.clearError(); // AUTHストアのエラーメッセージをクリア
         this.message =
           "入力したメールアドレスに再設定用リンクを記載したメールを送信しました。そちらのリンクより新パスワードの設定をお願いします。";
+      }
+    },
+    async guestLogin() {
+      let guestLoginForm = {
+        email: "hogehogetest7777@example.com",
+        password: "hj34dg9t",
+      };
+
+      await this.$store.dispatch("auth/login", guestLoginForm); // authストアのloginアクションを呼び出す
+      if (this.apiStatus) {
+        this.$router.push("/step_list"); // 通信成功したら、STEP一覧ページに移動する
       }
     },
     clearError() {

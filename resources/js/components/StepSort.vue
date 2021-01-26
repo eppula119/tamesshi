@@ -37,7 +37,6 @@
           <option value="high" class="p-selectItem">お気に入り多い順</option>
           <option value="low" class="p-selectItem">お気に入り少ない順</option>
         </select>
-        <input type="submit" class="p-searchBtn" placeholder="検索" />
       </form>
     </div>
   </div>

@@ -24,6 +24,19 @@
       width: 100%;
       padding-top: $space_8l;
     }
+    .p-guestLogin {
+      width: 100%;
+      @include mq('tab') {
+        
+      }
+      @include mq() {
+        width: 80%;
+        display: block;
+        margin: 0 auto;
+        margin-top: $space_m;
+        margin-bottom: $space_m;
+      }
+    }
     .p-authSns {
       width: 200%;
       padding-right: "-" + $space_10l;

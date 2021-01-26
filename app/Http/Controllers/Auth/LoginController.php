@@ -42,7 +42,7 @@ class LoginController extends Controller
         $this->middleware('guest')->except('logout');
     }
 
-    protected function validateLogin(Request $request)
+    protected function validateLogin(Request $request) // ログインバリデーション
     {
          $rules = [
         'email' => ['required', 'email'],
