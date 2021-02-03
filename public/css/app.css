@@ -364,6 +364,12 @@ button:not(:disabled) {
   background-color: #62b8bd;
 }
 
+@media screen and (max-width: 767px) {
+  .l-service {
+    padding: 0;
+  }
+}
+
 .l-data {
   width: 100%;
   background-color: #91ced9;
@@ -727,6 +733,9 @@ button:not(:disabled) {
   display: block;
   height: 50%;
   font-size: 1.6rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .c-step__wrap .c-indexContainer {
@@ -1150,9 +1159,22 @@ button:not(:disabled) {
   height: 50%;
 }
 
+@media screen and (max-width: 767px) {
+  .p-heroImg {
+    width: 60%;
+  }
+}
+
 .p-heroTitle {
   letter-spacing: 3px;
   font-size: 3.2rem;
+}
+
+@media screen and (max-width: 767px) {
+  .p-heroTitle {
+    font-size: 2.2rem;
+    width: 80%;
+  }
 }
 
 .p-serviceImg1 {
@@ -1161,6 +1183,21 @@ button:not(:disabled) {
   margin-bottom: 30px;
   padding-right: 60px;
   box-sizing: border-box;
+}
+
+@media screen and (max-width: 1179px) {
+  .p-serviceImg1 {
+    width: 100%;
+    padding-right: 0;
+    margin-bottom: 80px;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .p-serviceImg1 {
+    display: block;
+    width: 100%;
+  }
 }
 
 .p-serviceWrap1 {
@@ -1172,11 +1209,34 @@ button:not(:disabled) {
   box-sizing: border-box;
 }
 
+@media screen and (max-width: 1179px) {
+  .p-serviceWrap1 {
+    float: none;
+    width: 100%;
+    padding-left: 0;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .p-serviceWrap1 {
+    padding: 0 20px;
+    padding-bottom: 60px;
+  }
+}
+
 .p-serviceWrap1__heading {
   text-align: left;
   font-size: 5rem;
   margin-bottom: 30px;
   font-weight: bold;
+}
+
+@media screen and (max-width: 1179px) {
+  .p-serviceWrap1__heading {
+    width: 100%;
+    text-align: center;
+    font-size: 6rem;
+  }
 }
 
 .p-serviceWrap1__text {
@@ -1185,9 +1245,34 @@ button:not(:disabled) {
   font-size: 2rem;
 }
 
+@media screen and (max-width: 1179px) {
+  .p-serviceWrap1__text {
+    font-size: 3.2rem;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .p-serviceWrap1__text {
+    font-size: 2rem;
+  }
+}
+
+@media screen and (max-width: 1179px) {
+  .p-serviceWrap1__text--none {
+    display: none;
+  }
+}
+
 .p-dataWrap {
   padding: 100px;
   box-sizing: border-box;
+}
+
+@media screen and (max-width: 767px) {
+  .p-dataWrap {
+    padding: 60px 20px;
+    padding-bottom: 100px;
+  }
 }
 
 .p-dataWrap__text {
@@ -1200,15 +1285,54 @@ button:not(:disabled) {
   line-height: 1.6;
 }
 
+@media screen and (max-width: 1179px) {
+  .p-dataWrap__text {
+    width: 100%;
+    font-size: 3.2rem;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .p-dataWrap__text {
+    font-size: 2rem;
+    margin-bottom: 60px;
+  }
+}
+
+@media screen and (max-width: 1179px) {
+  .p-dataWrap__text--none {
+    display: none;
+  }
+}
+
 .p-dataWrap__img {
   display: block;
   width: 80%;
   margin: 0 auto;
 }
 
+@media screen and (max-width: 1179px) {
+  .p-dataWrap__img {
+    width: 100%;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .p-dataWrap__img {
+    height: 300px;
+  }
+}
+
 .p-produceContainer {
   padding: 100px 60px;
   box-sizing: border-box;
+}
+
+@media screen and (max-width: 767px) {
+  .p-produceContainer {
+    padding: 100px 20px;
+    padding-bottom: 60px;
+  }
 }
 
 .p-produceContainer__heading {
@@ -1219,9 +1343,27 @@ button:not(:disabled) {
   margin-bottom: 80px;
 }
 
+@media screen and (max-width: 1179px) {
+  .p-produceContainer__heading {
+    font-size: 6rem;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .p-produceContainer__heading {
+    font-size: 4rem;
+  }
+}
+
 .p-produceContainer__wrap {
   display: flex;
   justify-content: space-between;
+}
+
+@media screen and (max-width: 1179px) {
+  .p-produceContainer__wrap {
+    display: block;
+  }
 }
 
 .p-produceContainer__wrap .p-produceCard {
@@ -1230,11 +1372,32 @@ button:not(:disabled) {
   border-radius: 10px;
 }
 
+@media screen and (max-width: 1179px) {
+  .p-produceContainer__wrap .p-produceCard {
+    width: 80%;
+    margin: 0 auto;
+    margin-bottom: 100px;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .p-produceContainer__wrap .p-produceCard {
+    width: 95%;
+  }
+}
+
 .p-produceContainer__wrap .p-produceCard__heading {
   text-align: center;
   font-weight: bold;
   font-size: 1.8rem;
   margin: 30px 0;
+}
+
+@media screen and (max-width: 1179px) {
+  .p-produceContainer__wrap .p-produceCard__heading {
+    padding-top: 50px;
+    font-size: 3.2rem;
+  }
 }
 
 .p-produceContainer__wrap .p-produceCard__text {
@@ -1245,6 +1408,19 @@ button:not(:disabled) {
   letter-spacing: 2px;
 }
 
+@media screen and (max-width: 1179px) {
+  .p-produceContainer__wrap .p-produceCard__text {
+    width: 60%;
+    font-size: 1.6rem;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .p-produceContainer__wrap .p-produceCard__text {
+    width: 80%;
+  }
+}
+
 .p-produceContainer__wrap .p-produceCard__img {
   display: block;
   width: 60%;
@@ -1253,9 +1429,30 @@ button:not(:disabled) {
   box-sizing: border-box;
 }
 
+@media screen and (max-width: 1179px) {
+  .p-produceContainer__wrap .p-produceCard__img {
+    padding-bottom: 60px;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .p-produceContainer__wrap .p-produceCard__img {
+    width: 80%;
+    height: 300px;
+    margin-top: 30px;
+  }
+}
+
 .p-startImg {
   width: 30%;
   margin: 60px 0;
+}
+
+@media screen and (max-width: 767px) {
+  .p-startImg {
+    width: 60%;
+    margin-bottom: 40px;
+  }
 }
 
 .p-startBtn {
@@ -1269,6 +1466,13 @@ button:not(:disabled) {
   font-weight: bold;
   letter-spacing: 2px;
   margin-bottom: 100px;
+}
+
+@media screen and (max-width: 767px) {
+  .p-startBtn {
+    width: 80%;
+    font-size: 1.4rem;
+  }
 }
 
 .p-stepForm {
@@ -2360,18 +2564,19 @@ button:not(:disabled) {
   box-sizing: border-box;
 }
 
-@media screen and (max-width: 767px) {
-  .p-childStep__number {
-    display: block;
-    border: none;
-  }
+.p-childStep__title {
+  display: inline-block;
+  width: 80%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  vertical-align: top;
 }
 
-.p-childStep__title {
-  display: -webkit-box;
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp: 1;
-  overflow: hidden;
+@media screen and (max-width: 767px) {
+  .p-childStep__title {
+    width: 60%;
+  }
 }
 
 .p-btnChallenge {

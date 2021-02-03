@@ -263,6 +263,9 @@ export default {
 
       if (this.step) {
         console.log("編集画面表示中");
+        if (this.step.image) {
+          this.image = this.step.image;
+        }
 
         this.title = this.step.title;
         this.content = this.step.content;

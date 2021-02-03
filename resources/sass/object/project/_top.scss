@@ -4,10 +4,17 @@
   margin-bottom: $space_l;
   width: 30%;
   height: 50%;
+  @include mq() {
+    width: 60%;
+  }
 }
 .p-heroTitle {
   letter-spacing: 3px;
   font-size: $font-size_4l;
+  @include mq() {
+   font-size: $font-size_xxl;
+   width: 80%;
+  }
 }
 //=============== Service部分  ========================
 .p-serviceImg1 {
@@ -16,6 +23,15 @@
   margin-bottom: $space_3l;
   padding-right: $space_6l;
   box-sizing: border-box;
+  @include mq('tab') {
+    width: 100%;
+    padding-right: 0;
+    margin-bottom: $space_8l;
+  }
+  @include mq() {
+    display: block;
+    width: 100%;
+  }
 }
 .p-serviceWrap1 {
   color: $color_light100;
@@ -24,22 +40,51 @@
   padding-left: $space_6l;
   padding-left: $space_8l;
   box-sizing: border-box;
+  @include mq('tab') {
+    float: none;
+    width: 100%;
+    padding-left: 0;
+  }
+  @include mq() {
+    padding: 0 $space_xl;
+    padding-bottom: $space_6l;
+  }
   &__heading {
     text-align: left;
     font-size: $font-size_7l;
     margin-bottom: $space_3l;
     font-weight: bold;
+    @include mq('tab') {
+      width: 100%;
+      text-align: center;
+      font-size: $font-size_8l;
+    }
   }
   &__text {
     line-height: 2;
     letter-spacing: 3px;
     font-size: $font-size_xl;
+    @include mq('tab') {
+      font-size: $font-size_4l;
+    }
+    @include mq() {
+      font-size: $font-size_xl;
+    }
+    &--none {
+      @include mq('tab') {
+        display: none;
+      }
+    }
   }
 }
 //=============== データ部分  ========================
 .p-dataWrap {
   padding: $space_10l;
   box-sizing: border-box;
+  @include mq() {
+    padding: $space_6l $space_xl;
+    padding-bottom: $space_10l;
+  }
   &__text {
     width: 65%;
     margin: 0 auto;
@@ -48,36 +93,80 @@
     letter-spacing: 2;
     font-size: $font-size_2l;
     line-height: 1.6;
+    @include mq('tab') {
+      width: 100%;
+      font-size: $font-size_4l;
+    }
+    @include mq() {
+      font-size: $font-size_xl;
+      margin-bottom: $space_6l;
+    }
+    &--none {
+      @include mq('tab') {
+        display: none;
+      }
+    }
   }
   &__img {
     display: block;
     width: 80%;
     margin: 0 auto;
+    @include mq('tab') {
+      width: 100%;
+    }
+    @include mq() {
+      height: 300px;
+    }
   }
 }
 //=============== 機能紹介部分 ========================
 .p-produceContainer {
   padding: $space_10l $space_6l;
   box-sizing: border-box;
+  @include mq() {
+    padding: $space_10l $space_xl;
+    padding-bottom: $space_6l;
+  }
   &__heading {
     text-align: center;
     font-weight: bold;
     font-size: $font-size_6l;
     letter-spacing: 6px;
     margin-bottom: $space_8l;
+    @include mq('tab') {
+      font-size: $font-size_8l;
+    }
+    @include mq() {
+      font-size: $font-size_6l;
+    }
   }
   &__wrap {
     display: flex;
     justify-content: space-between;
+    @include mq('tab') {
+      display: block;
+    }
     .p-produceCard {
       background-color: $color_main;
       width: 30%;
       border-radius: 10px;
+      @include mq('tab') {
+        width: 80%;
+        margin: 0 auto;
+        margin-bottom: $space_10l;
+      }
+      @include mq() {
+        width: 95%;
+      }
       &__heading {
         text-align: center;
         font-weight: bold;
         font-size: $font-size_l;
         margin: $space_3l 0;
+        @include mq('tab') {
+          padding-top: $space_5l;
+          font-size: $font-size_4l;
+        }
       }
       &__text {
         display: block;
@@ -85,6 +174,13 @@
         margin: 0 auto;
         font-size: $font-size_xs;
         letter-spacing: 2px;
+        @include mq('tab') {
+          width: 60%;
+          font-size: $font-size_m;
+        }
+        @include mq() {
+          width: 80%;
+        }
       }
       &__img { 
         display: block;
@@ -92,6 +188,14 @@
         margin: 0 auto;
         padding: $space_3l 0;
         box-sizing: border-box;
+        @include mq('tab') {
+          padding-bottom: $space_6l;
+        }
+        @include mq() {
+          width: 80%;
+          height: 300px;
+          margin-top: $space_3l;
+        }
       }
     }
   }
@@ -99,7 +203,11 @@
 //=============== 「今すぐ始める」ボタン部分 ========================
 .p-startImg {
   width: 30%;
-  margin: $space_6l 0;  
+  margin: $space_6l 0; 
+  @include mq() {
+    width: 60%;
+    margin-bottom: $space_4l;
+  } 
 }
 .p-startBtn {
     width: 60%;
@@ -112,4 +220,8 @@
     font-weight: bold;
     letter-spacing: 2px;
     margin-bottom: $space_10l;
+    @include mq() {
+      width: 80%;
+      font-size: $font-size_s;
+    }
   }

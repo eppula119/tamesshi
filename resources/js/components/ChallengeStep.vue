@@ -1,16 +1,16 @@
 <template>
   <div class="c-step p-step">
-    <img :src="item.image" alt="" class="c-step__img" />
+    <img :src="item.image" class="c-step__img" v-if="item.image !== null" />
+    <img src="images/no_image.png" alt class="c-step__img" v-else />
 
     <div class="c-itemCover">
-      <p class="c-itemCover__outline">{{ item.title }}</p>
       <RouterLink
         class="c-itemCover__link"
         :to="`/step_list/${item.id}`"
         :title="`View the photo by ${item.id}`"
       >
-        詳細を見る
-        <i class="fas fa-search-plus c-coverIcon"></i>
+        <p class="c-itemCover__outline">{{ item.title }}</p>
+        <span>詳細を見る<i class="fas fa-search-plus c-coverIcon"></i></span>
       </RouterLink>
     </div>
 

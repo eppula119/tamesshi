@@ -22,7 +22,7 @@
             </ul>
           </span>
 
-          <p class="p-childForm__heading">子STEP{{ page }}1:内容</p>
+          <p class="p-childForm__heading">子STEP{{ page }}:内容</p>
           <textarea
             class="p-childForm__content"
             name="content"
@@ -255,6 +255,8 @@ export default {
       if (this.filterChilds.length !== 0) {
         // 編集の場合
         return this.onNext();
+      } else {
+        this.page = this.page + 1;
       }
     },
     onPrev() {
@@ -267,6 +269,9 @@ export default {
       return this.changeForm();
     },
     changeForm() {
+      if (this.filterChilds[0].image) {
+        this.image = this.filterChilds[0].image;
+      }
       this.title = this.filterChilds[0].title;
       this.content = this.filterChilds[0].content;
       this.preview = this.filterChilds[0].image;
@@ -286,6 +291,9 @@ export default {
         console.log("トータルページ");
         this.totalPage = Math.ceil(this.childs.length / this.perPage);
         console.log(this.totalPage);
+        if (this.filterChilds[0].image) {
+          this.image = this.filterChilds[0].image;
+        }
 
         this.title = this.filterChilds[0].title;
         this.content = this.filterChilds[0].content;

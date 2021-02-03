@@ -12,6 +12,9 @@
   padding: $space_10l;
   overflow: hidden;
   background-color: $color_sub;
+  @include mq() {
+    padding: 0;
+  }
 }
 //=============== データ部分  ========================
 .l-data {

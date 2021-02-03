@@ -122,16 +122,21 @@
     padding-right: 8px;
     margin-right: 3px;
     box-sizing: border-box;
-    @include  mq() {
-      display: block;
-      border: none;
-    }
+    // @include  mq() {
+    //   display: block;
+    //   border: none;
+    // }
   }
   &__title {
-    display: -webkit-box;
-    -webkit-box-orient: vertical;
-    -webkit-line-clamp: 1;
+    display: inline-block;
+    width: 80%;
     overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    vertical-align: top;
+    @include  mq() {
+      width: 60%;
+    }
   }
 }
 .p-btnChallenge {

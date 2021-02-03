@@ -11,8 +11,8 @@
       <div class="p-serviceWrap1">
         <p class="p-serviceWrap1__heading">STEPは無料</p>
         <span class="p-serviceWrap1__text">
-          他人の知恵と経験が詰まった<br />
-          様々なSTEPを全て無料で<br />
+          他人の知恵と経験が詰まった<br class="p-serviceWrap1__text--none" />
+          様々なSTEPを全て無料で<br class="p-serviceWrap1__text--none" />
           誰でも簡単に見る事が出来ます。
         </span>
       </div>
@@ -22,7 +22,9 @@
     <section class="l-data">
       <div class="p-dataWrap">
         <p class="p-dataWrap__text">
-          ある統計データでは、中学生の学習上での悩みの<br />半分以上はh上手な勉強のやり方がわからないと回答。
+          ある統計データでは、中学生の学習上での悩みの<br
+            class="p-dataWrap__text--none"
+          />半分以上はh上手な勉強のやり方がわからないと回答。
         </p>
         <img src="images/data.png" alt="" class="p-dataWrap__img" />
       </div>

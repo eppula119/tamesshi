@@ -61,6 +61,8 @@ export default {
     var url = "/api/category/search";
     axios.post(url).then(function (response) {
       // カテゴリーモデルからデータを全て取得
+      console.log("カテゴリーデータ");
+      console.log(response.data);
       self.categorys = response.data["category"];
     });
   },

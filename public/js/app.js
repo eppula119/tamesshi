@@ -4077,13 +4077,16 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
                 _this3.reset();
 
                 if (!(_this3.filterChilds.length !== 0)) {
-                  _context.next = 41;
+                  _context.next = 43;
                   break;
                 }
 
                 return _context.abrupt("return", _this3.onNext());
 
-              case 41:
+              case 43:
+                _this3.page = _this3.page + 1;
+
+              case 44:
               case "end":
                 return _context.stop();
             }
@@ -4101,6 +4104,10 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       return this.changeForm();
     },
     changeForm: function changeForm() {
+      if (this.filterChilds[0].image) {
+        this.image = this.filterChilds[0].image;
+      }
+
       this.title = this.filterChilds[0].title;
       this.content = this.filterChilds[0].content;
       this.preview = this.filterChilds[0].image;
@@ -4120,6 +4127,11 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         console.log("トータルページ");
         this.totalPage = Math.ceil(this.childs.length / this.perPage);
         console.log(this.totalPage);
+
+        if (this.filterChilds[0].image) {
+          this.image = this.filterChilds[0].image;
+        }
+
         this.title = this.filterChilds[0].title;
         this.content = this.filterChilds[0].content;
         this.preview = this.filterChilds[0].image;
@@ -4489,6 +4501,11 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
       if (this.step) {
         console.log("編集画面表示中");
+
+        if (this.step.image) {
+          this.image = this.step.image;
+        }
+
         this.title = this.step.title;
         this.content = this.step.content;
         this.preview = this.step.image;
@@ -4769,8 +4786,6 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-//
-//
 //
 //
 //
@@ -5359,6 +5374,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     var url = "/api/category/search";
     axios.post(url).then(function (response) {
       // カテゴリーモデルからデータを全て取得
+      console.log("カテゴリーデータ");
+      console.log(response.data);
       self.categorys = response.data["category"];
     });
   },
@@ -5437,6 +5454,8 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
+//
+//
 //
 //
 //
@@ -7242,19 +7261,20 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "c-step p-step" }, [
-    _c("img", {
-      staticClass: "c-step__img",
-      attrs: { src: _vm.item.image, alt: "" }
-    }),
+    _vm.item.image !== null
+      ? _c("img", {
+          staticClass: "c-step__img",
+          attrs: { src: _vm.item.image }
+        })
+      : _c("img", {
+          staticClass: "c-step__img",
+          attrs: { src: "images/no_image.png", alt: "" }
+        }),
     _vm._v(" "),
     _c(
       "div",
       { staticClass: "c-itemCover" },
       [
-        _c("p", { staticClass: "c-itemCover__outline" }, [
-          _vm._v(_vm._s(_vm.item.title))
-        ]),
-        _vm._v(" "),
         _c(
           "RouterLink",
           {
@@ -7265,8 +7285,14 @@ var render = function() {
             }
           },
           [
-            _vm._v("\n      詳細を見る\n      "),
-            _c("i", { staticClass: "fas fa-search-plus c-coverIcon" })
+            _c("p", { staticClass: "c-itemCover__outline" }, [
+              _vm._v(_vm._s(_vm.item.title))
+            ]),
+            _vm._v(" "),
+            _c("span", [
+              _vm._v("詳細を見る"),
+              _c("i", { staticClass: "fas fa-search-plus c-coverIcon" })
+            ])
           ]
         )
       ],
@@ -8875,7 +8901,7 @@ var render = function() {
               : _vm._e(),
             _vm._v(" "),
             _c("p", { staticClass: "p-childForm__heading" }, [
-              _vm._v("子STEP" + _vm._s(_vm.page) + "1:内容")
+              _vm._v("子STEP" + _vm._s(_vm.page) + ":内容")
             ]),
             _vm._v(" "),
             _c("textarea", {
@@ -9774,31 +9800,15 @@ var render = function() {
               })
         ]),
         _vm._v(" "),
-        _vm._l(_vm.childs, function(child) {
-          return _c(
-            "div",
-            { key: child.id, staticClass: "p-childStep" },
-            [
-              _c(
-                "RouterLink",
-                {
-                  attrs: {
-                    to: "/step_list/step=" + _vm.step.id + "/child=" + child.id
-                  }
-                },
-                [
-                  _c("span", { staticClass: "p-childStep__number" }, [
-                    _vm._v("STEP:1")
-                  ]),
-                  _vm._v(" "),
-                  _c("span", { staticClass: "p-childStep__title" }, [
-                    _vm._v(_vm._s(child.title))
-                  ])
-                ]
-              )
-            ],
-            1
-          )
+        _vm._l(_vm.childs, function(child, i) {
+          return _c("div", { key: child.id, staticClass: "p-childStep" }, [
+            _c("span", { staticClass: "p-childStep__number" }, [
+              _vm._v("STEP:" + _vm._s(i + 1))
+            ]),
+            _c("span", { staticClass: "p-childStep__title" }, [
+              _vm._v(_vm._s(child.title))
+            ])
+          ])
         }),
         _vm._v(" "),
         _vm.myStep
@@ -10128,9 +10138,9 @@ var staticRenderFns = [
         _vm._v(" "),
         _c("span", { staticClass: "p-serviceWrap1__text" }, [
           _vm._v("\n        他人の知恵と経験が詰まった"),
-          _c("br"),
+          _c("br", { staticClass: "p-serviceWrap1__text--none" }),
           _vm._v("\n        様々なSTEPを全て無料で"),
-          _c("br"),
+          _c("br", { staticClass: "p-serviceWrap1__text--none" }),
           _vm._v("\n        誰でも簡単に見る事が出来ます。\n      ")
         ])
       ])
@@ -10144,7 +10154,7 @@ var staticRenderFns = [
       _c("div", { staticClass: "p-dataWrap" }, [
         _c("p", { staticClass: "p-dataWrap__text" }, [
           _vm._v("\n        ある統計データでは、中学生の学習上での悩みの"),
-          _c("br"),
+          _c("br", { staticClass: "p-dataWrap__text--none" }),
           _vm._v("半分以上はh上手な勉強のやり方がわからないと回答。\n      ")
         ]),
         _vm._v(" "),
@@ -28237,7 +28247,7 @@ var routes = [{
   }
 }, {
   path: "/step_list",
-  // STEP登録画面へのパス
+  // STEP一覧表示画面へのパス
   component: _components_StepList_vue__WEBPACK_IMPORTED_MODULE_3__["default"]
 }, {
   path: '/step_list/:id',

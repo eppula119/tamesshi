@@ -49,7 +49,7 @@ const routes = [
     }
   },
   {
-    path: "/step_list", // STEP登録画面へのパス
+    path: "/step_list", // STEP一覧表示画面へのパス
     component: StepList
   },
   {

@@ -32,11 +32,9 @@
       </div>
       <!-- --------------------------------- 子STEP一覧部分 -------------------------------- -->
 
-      <div class="p-childStep" v-for="child in childs" :key="child.id">
-        <RouterLink :to="`/step_list/step=${step.id}/child=${child.id}`">
-          <span class="p-childStep__number">STEP:1</span>
-          <span class="p-childStep__title">{{ child.title }}</span>
-        </RouterLink>
+      <div class="p-childStep" v-for="(child, i) in childs" :key="child.id">
+        <span class="p-childStep__number">STEP:{{ i + 1 }}</span
+        ><span class="p-childStep__title">{{ child.title }}</span>
       </div>
       <!-- ---------------------------------ボタン部分 -------------------------------- -->
       <div class="p-btnContainer" v-if="myStep">

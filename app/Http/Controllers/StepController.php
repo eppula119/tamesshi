@@ -339,7 +339,9 @@ class StepController extends Controller
             'time' => 'required|integer'
         ]);
         Log::debug('バリデーション1次審査クリア！');
-        if(!empty($request['image'])) {
+
+        
+        if(!empty($request['image']) && $step["image"] !== $request["image"] ) {  // 1/29編集中！！！！！！！！！
             Log::debug('バリデーション2次審査中！');
             $rules = ['image' => ['file', new MegaBytes(1)]];
             $this->validate($request, $rules);
@@ -348,9 +350,11 @@ class StepController extends Controller
         
         $step = Step::find($id);
         $user_id = Auth::id();
+
+       
         
 
-        if(!empty($request['image'])){ // 画像が編集されている場合、新しく登録
+        if(!empty($request['image']) && $step["image"] !== $request["image"] ){ // 画像が編集されている場合、新しく登録
           $image = $request['image'];
 					$path = Storage::disk('s3')->put('/', $image, 'public');
 					$step['image'] = Storage::disk('s3')->url($path);
@@ -385,7 +389,7 @@ class StepController extends Controller
             'time' => 'required|integer',
         ]);
         Log::debug('子STEPバリデーション1次審査クリア！');
-        if(!empty($request['image'])) {
+        if(!empty($request['image']) && $step["image"] !== $request["image"]) {
             Log::debug('子STEPバリデーション2次審査中！');
             $rules = ['image' => ['file', new MegaBytes(1)]];
             $this->validate($request, $rules);
@@ -394,7 +398,7 @@ class StepController extends Controller
         $step = ChildStep::find($id);
         $user_id = Auth::id();
 
-        if(!empty($request['image'])){ // 画像が編集されている場合、新しく登録
+        if(!empty($request['image']) && $step["image"] !== $request["image"]){ // 画像が編集されている場合、新しく登録
 					$image = $request['image'];
 					$path = Storage::disk('s3')->put('/', $image, 'public');
 					$step['image'] = Storage::disk('s3')->url($path);
