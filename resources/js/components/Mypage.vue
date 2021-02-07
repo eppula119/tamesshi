@@ -5,8 +5,6 @@
       <p class="p-mypage__title">マイページ</p>
       <!-- --------------------------------- 登録したSTEP -------------------------------- -->
       <div class="p-myStepWrap">
-        <i class="fas fa-caret-left p-myStepWrap__arrowLeft"></i>
-        <i class="fas fa-caret-right p-myStepWrap__arrowRight"></i>
         <p class="p-myStepWrap__title">登録したSTEP</p>
         <div class="p-stepContainer">
           <!---------------------------------- ４つ表示 --------------------------------->
@@ -24,8 +22,6 @@
       </div>
       <!-- --------------------------------- お気に入りしたSTEP -------------------------------- -->
       <div class="p-favStepWrap">
-        <i class="fas fa-caret-left p-favStepWrap__arrowLeft"></i>
-        <i class="fas fa-caret-right p-favStepWrap__arrowRight"></i>
         <p class="p-favStepWrap__title">お気に入りSTEP</p>
         <div class="p-stepContainer">
           <!---------------------------------- ４つ表示 --------------------------------->
@@ -44,8 +40,6 @@
 
       <!-- --------------------------------- チャレンジ中STEP -------------------------------- -->
       <div class="p-challengeStepWrap">
-        <i class="fas fa-caret-left p-challengeStepWrap__arrowLeft"></i>
-        <i class="fas fa-caret-right p-challengeStepWrap__arrowRight"></i>
         <p class="p-challengeStepWrap__title">チャレンジ中STEP</p>
         <div class="p-stepContainer">
           <!---------------------------------- ４つ表示 --------------------------------->

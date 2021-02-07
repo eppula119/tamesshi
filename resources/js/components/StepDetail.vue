@@ -168,10 +168,17 @@ export default {
         this.$store.commit("error/setCode", response.status);
       }
       this.$router.push(`/step_list/step=${this.step.id}/child`);
+      this.scrollTop();
     },
     // 編集画面へ遷移する
     async edit() {
       this.$router.push(`/register_step`);
+    },
+    async scrollTop() {
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth",
+      });
     },
     // Twitterシェア
     async twitterShare() {

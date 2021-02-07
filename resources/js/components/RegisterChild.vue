@@ -257,15 +257,18 @@ export default {
         return this.onNext();
       } else {
         this.page = this.page + 1;
+        this.scrollTop();
       }
     },
     onPrev() {
       this.page = this.prevPage;
+      this.scrollTop();
       return this.changeForm();
     },
     onNext() {
       console.log("次のページへクリックされたよ");
       this.page = this.nextPage;
+      this.scrollTop();
       return this.changeForm();
     },
     changeForm() {
@@ -303,6 +306,12 @@ export default {
       } else {
         console.log("新規子STEP画面表示中");
       }
+    },
+    async scrollTop() {
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth",
+      });
     },
   },
   watch: {

@@ -2749,6 +2749,12 @@ button:not(:disabled) {
   transition: 0.3s;
 }
 
+@media screen and (max-width: 767px) {
+  .p-childContainer .p-preBtn {
+    margin: 20px 0;
+  }
+}
+
 .p-childContainer .p-nextBtn,
 .p-childContainer .p-preBtn {
   font-size: 1rem;

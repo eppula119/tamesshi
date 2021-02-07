@@ -2316,11 +2316,11 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
               case 9:
                 console.log("次の子STEPへ遷移開始");
-                _this3.page = _this3.nextPage; // this.$router.push(
-                //   `/step_list/step=${this.step.id}/child=${this.step.child[0].id}`
-                // );
+                _this3.page = _this3.nextPage;
 
-              case 11:
+                _this3.scrollTop();
+
+              case 12:
               case "end":
                 return _context2.stop();
             }
@@ -2330,18 +2330,39 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     },
     onPrev: function onPrev() {
       this.page = this.prevPage;
+      this.scrollTop();
     },
     onNext: function onNext() {
       console.log("次のページへクリックされたよ");
-      this.page = this.nextPage; // this.$router.push(`/step_list/step=${this.step_id}/child=${this.page}`);
+      this.page = this.nextPage;
+      this.scrollTop();
     },
-    // Twitterシェア
-    twitterShare: function twitterShare() {
+    scrollTop: function scrollTop() {
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee3() {
-        var shareURL;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee3$(_context3) {
           while (1) {
             switch (_context3.prev = _context3.next) {
+              case 0:
+                window.scrollTo({
+                  top: 0,
+                  behavior: "smooth"
+                });
+
+              case 1:
+              case "end":
+                return _context3.stop();
+            }
+          }
+        }, _callee3);
+      }))();
+    },
+    // Twitterシェア
+    twitterShare: function twitterShare() {
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee4() {
+        var shareURL;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee4$(_context4) {
+          while (1) {
+            switch (_context4.prev = _context4.next) {
               case 0:
                 //シェアする画面を設定
                 shareURL = "https://twitter.com/intent/tweet?text=" + "あなたに合った学習方法が見つかるかも？「STEP」" + "%20%23STEP" + "&url=" + "https://gentle-basin-84705.herokuapp.com/top"; //シェア用の画面へ移行
@@ -2350,10 +2371,10 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
               case 2:
               case "end":
-                return _context3.stop();
+                return _context4.stop();
             }
           }
-        }, _callee3);
+        }, _callee4);
       }))();
     }
   },
@@ -2362,20 +2383,20 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       handler: function handler() {
         var _this4 = this;
 
-        return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee4() {
-          return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee4$(_context4) {
+        return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee5() {
+          return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee5$(_context5) {
             while (1) {
-              switch (_context4.prev = _context4.next) {
+              switch (_context5.prev = _context5.next) {
                 case 0:
-                  _context4.next = 2;
+                  _context5.next = 2;
                   return _this4.fetchChildStep();
 
                 case 2:
                 case "end":
-                  return _context4.stop();
+                  return _context5.stop();
               }
             }
-          }, _callee4);
+          }, _callee5);
         }))();
       },
       immediate: true
@@ -3234,12 +3255,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
-//
-//
-//
-//
-//
-//
 
 
 
@@ -3361,11 +3376,19 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
-/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var vuejs_paginate__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vuejs-paginate */ "./node_modules/vuejs-paginate/dist/index.js");
-/* harmony import */ var vuejs_paginate__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(vuejs_paginate__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var vuejs_paginate__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vuejs-paginate */ "./node_modules/vuejs-paginate/dist/index.js");
+/* harmony import */ var vuejs_paginate__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(vuejs_paginate__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
 //
 //
 //
@@ -3386,7 +3409,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-vue__WEBPACK_IMPORTED_MODULE_0___default.a.component("paginate", vuejs_paginate__WEBPACK_IMPORTED_MODULE_1___default.a);
+vue__WEBPACK_IMPORTED_MODULE_1___default.a.component("paginate", vuejs_paginate__WEBPACK_IMPORTED_MODULE_2___default.a);
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
     items: {
@@ -3400,11 +3423,26 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.component("paginate", vuejs_paginate_
 
     };
   },
-  methods: {// clickCallback(pageNum) {
-    //   this.page = pageNum; // pageNumはpagerの何番目をclickしたかを取得
-    //   // console.log("dispatchページネーション遷移");
-    //   // this.$store.dispatch("paging/setPageNum", pageNum); // 何番目をclickしたかをstoreの値にset
-    // }
+  methods: {
+    scrollTop: function scrollTop() {
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                window.scrollTo({
+                  top: 0,
+                  behavior: "smooth"
+                });
+
+              case 1:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee);
+      }))();
+    }
   },
   computed: {
     // 全ページ数
@@ -3417,6 +3455,8 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.component("paginate", vuejs_paginate_
       },
       set: function set(pageNum) {
         this.$store.dispatch("paging/setPageNum", pageNum); // pageストアに移動先のページ番号をセット
+
+        this.scrollTop();
       }
     }
   }
@@ -4086,7 +4126,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
               case 43:
                 _this3.page = _this3.page + 1;
 
-              case 44:
+                _this3.scrollTop();
+
+              case 45:
               case "end":
                 return _context.stop();
             }
@@ -4096,11 +4138,13 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     },
     onPrev: function onPrev() {
       this.page = this.prevPage;
+      this.scrollTop();
       return this.changeForm();
     },
     onNext: function onNext() {
       console.log("次のページへクリックされたよ");
       this.page = this.nextPage;
+      this.scrollTop();
       return this.changeForm();
     },
     changeForm: function changeForm() {
@@ -4140,6 +4184,25 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       } else {
         console.log("新規子STEP画面表示中");
       }
+    },
+    scrollTop: function scrollTop() {
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2() {
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
+          while (1) {
+            switch (_context2.prev = _context2.next) {
+              case 0:
+                window.scrollTo({
+                  top: 0,
+                  behavior: "smooth"
+                });
+
+              case 1:
+              case "end":
+                return _context2.stop();
+            }
+          }
+        }, _callee2);
+      }))();
     }
   },
   watch: {
@@ -4147,20 +4210,20 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       handler: function handler() {
         var _this4 = this;
 
-        return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2() {
-          return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
+        return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee3() {
+          return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee3$(_context3) {
             while (1) {
-              switch (_context2.prev = _context2.next) {
+              switch (_context3.prev = _context3.next) {
                 case 0:
-                  _context2.next = 2;
+                  _context3.next = 2;
                   return _this4.fetchChildStep();
 
                 case 2:
                 case "end":
-                  return _context2.stop();
+                  return _context3.stop();
               }
             }
-          }, _callee2);
+          }, _callee3);
         }))();
       },
       immediate: true
@@ -5047,7 +5110,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
                 _this4.$router.push("/step_list/step=".concat(_this4.step.id, "/child"));
 
-              case 5:
+                _this4.scrollTop();
+
+              case 6:
               case "end":
                 return _context4.stop();
             }
@@ -5074,13 +5139,32 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         }, _callee5);
       }))();
     },
-    // Twitterシェア
-    twitterShare: function twitterShare() {
+    scrollTop: function scrollTop() {
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee6() {
-        var shareURL;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee6$(_context6) {
           while (1) {
             switch (_context6.prev = _context6.next) {
+              case 0:
+                window.scrollTo({
+                  top: 0,
+                  behavior: "smooth"
+                });
+
+              case 1:
+              case "end":
+                return _context6.stop();
+            }
+          }
+        }, _callee6);
+      }))();
+    },
+    // Twitterシェア
+    twitterShare: function twitterShare() {
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee7() {
+        var shareURL;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee7$(_context7) {
+          while (1) {
+            switch (_context7.prev = _context7.next) {
               case 0:
                 //シェアする画面を設定
                 shareURL = "https://twitter.com/intent/tweet?text=" + "あなたに合った学習方法が見つかるかも？「STEP」" + "%20%23STEP" + "&url=" + "https://gentle-basin-84705.herokuapp.com/top"; //シェア用の画面へ移行
@@ -5089,10 +5173,10 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
               case 2:
               case "end":
-                return _context6.stop();
+                return _context7.stop();
             }
           }
-        }, _callee6);
+        }, _callee7);
       }))();
     }
   },
@@ -5101,20 +5185,20 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       handler: function handler() {
         var _this6 = this;
 
-        return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee7() {
-          return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee7$(_context7) {
+        return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee8() {
+          return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee8$(_context8) {
             while (1) {
-              switch (_context7.prev = _context7.next) {
+              switch (_context8.prev = _context8.next) {
                 case 0:
-                  _context7.next = 2;
+                  _context8.next = 2;
                   return _this6.fetchStep();
 
                 case 2:
                 case "end":
-                  return _context7.stop();
+                  return _context8.stop();
               }
             }
-          }, _callee7);
+          }, _callee8);
         }))();
       },
       immediate: true
@@ -8465,10 +8549,6 @@ var render = function() {
       _c("p", { staticClass: "p-mypage__title" }, [_vm._v("マイページ")]),
       _vm._v(" "),
       _c("div", { staticClass: "p-myStepWrap" }, [
-        _c("i", { staticClass: "fas fa-caret-left p-myStepWrap__arrowLeft" }),
-        _vm._v(" "),
-        _c("i", { staticClass: "fas fa-caret-right p-myStepWrap__arrowRight" }),
-        _vm._v(" "),
         _c("p", { staticClass: "p-myStepWrap__title" }, [
           _vm._v("登録したSTEP")
         ]),
@@ -8488,12 +8568,6 @@ var render = function() {
       ]),
       _vm._v(" "),
       _c("div", { staticClass: "p-favStepWrap" }, [
-        _c("i", { staticClass: "fas fa-caret-left p-favStepWrap__arrowLeft" }),
-        _vm._v(" "),
-        _c("i", {
-          staticClass: "fas fa-caret-right p-favStepWrap__arrowRight"
-        }),
-        _vm._v(" "),
         _c("p", { staticClass: "p-favStepWrap__title" }, [
           _vm._v("お気に入りSTEP")
         ]),
@@ -8513,14 +8587,6 @@ var render = function() {
       ]),
       _vm._v(" "),
       _c("div", { staticClass: "p-challengeStepWrap" }, [
-        _c("i", {
-          staticClass: "fas fa-caret-left p-challengeStepWrap__arrowLeft"
-        }),
-        _vm._v(" "),
-        _c("i", {
-          staticClass: "fas fa-caret-right p-challengeStepWrap__arrowRight"
-        }),
-        _vm._v(" "),
         _c("p", { staticClass: "p-challengeStepWrap__title" }, [
           _vm._v("チャレンジ中STEP")
         ]),

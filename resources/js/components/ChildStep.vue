@@ -126,17 +126,22 @@ export default {
       }
       console.log("次の子STEPへ遷移開始");
       this.page = this.nextPage;
-      // this.$router.push(
-      //   `/step_list/step=${this.step.id}/child=${this.step.child[0].id}`
-      // );
+      this.scrollTop();
     },
     onPrev() {
       this.page = this.prevPage;
+      this.scrollTop();
     },
     onNext() {
       console.log("次のページへクリックされたよ");
       this.page = this.nextPage;
-      // this.$router.push(`/step_list/step=${this.step_id}/child=${this.page}`);
+      this.scrollTop();
+    },
+    async scrollTop() {
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth",
+      });
     },
     // Twitterシェア
     async twitterShare() {

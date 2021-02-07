@@ -97,6 +97,11 @@
     letter-spacing: 3px;
     transition: 0.3s;
   }
+  .p-preBtn {  
+    @include mq() {
+      margin: $space_xl 0;
+    }
+  }
   .p-nextBtn, .p-preBtn {
     font-size: $font-size_default;
     color: $color_light100;

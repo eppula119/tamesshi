@@ -35,11 +35,12 @@ export default {
     };
   },
   methods: {
-    // clickCallback(pageNum) {
-    //   this.page = pageNum; // pageNumはpagerの何番目をclickしたかを取得
-    //   // console.log("dispatchページネーション遷移");
-    //   // this.$store.dispatch("paging/setPageNum", pageNum); // 何番目をclickしたかをstoreの値にset
-    // }
+    async scrollTop() {
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth",
+      });
+    },
   },
   computed: {
     // 全ページ数
@@ -52,6 +53,7 @@ export default {
       },
       set(pageNum) {
         this.$store.dispatch("paging/setPageNum", pageNum); // pageストアに移動先のページ番号をセット
+        this.scrollTop();
       },
     },
   },
