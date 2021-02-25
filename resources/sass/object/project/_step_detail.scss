@@ -102,7 +102,7 @@
 }
 .p-detailImage {
   width: 100%;
-  height: $height_m;
+  height: $height_l;
   margin-bottom: $space_8l;
   border-radius: 20px;
   &__img {
@@ -172,7 +172,7 @@
   padding: 8px;
   box-sizing: border-box;
   letter-spacing: 1px;
-  margin-bottom: $space_xl;
+  // margin-bottom: $space_xl;
   transition: 0.3s;
 }
 .p-snsBtn:hover {
