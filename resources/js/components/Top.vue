@@ -24,7 +24,7 @@
         <p class="p-dataWrap__text">
           ある統計データでは、中学生の学習上での悩みの<br
             class="p-dataWrap__text--none"
-          />半分以上はh上手な勉強のやり方がわからないと回答。
+          />半分以上は上手な勉強のやり方がわからないと回答。
         </p>
         <img src="images/data.png" alt="" class="p-dataWrap__img" />
       </div>

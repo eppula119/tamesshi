@@ -2182,6 +2182,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -2286,46 +2287,77 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         }, _callee);
       }))();
     },
-    // クリア
-    clear: function clear(id) {
+    // クリアー or クリア前に戻す
+    onClearClick: function onClearClick(id) {
       var _this3 = this;
 
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2() {
-        var response;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
           while (1) {
             switch (_context2.prev = _context2.next) {
               case 0:
-                console.log("クリア開始");
-                console.log(id);
-                _context2.next = 4;
-                return axios.post("/api/clear/".concat(id));
+                if (_this3.childs.cleard) {
+                  _this3.favFlg = false;
 
-              case 4:
-                response = _context2.sent;
-                console.log(response.data);
+                  _this3.unfavorite();
 
-                if (!(response.status !== _util__WEBPACK_IMPORTED_MODULE_1__["OK"])) {
-                  _context2.next = 9;
-                  break;
+                  console.log("いいね！");
+                } else {
+                  _this3.favFlg = true;
+
+                  _this3.favorite();
+
+                  console.log("いいね削除");
                 }
 
-                _this3.$store.commit("error/setCode", response.status);
-
-                return _context2.abrupt("return", false);
-
-              case 9:
-                console.log("次の子STEPへ遷移開始");
-                _this3.page = _this3.nextPage;
-
-                _this3.scrollTop();
-
-              case 12:
+              case 1:
               case "end":
                 return _context2.stop();
             }
           }
         }, _callee2);
+      }))();
+    },
+    // クリア
+    clear: function clear(id) {
+      var _this4 = this;
+
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee3() {
+        var response;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee3$(_context3) {
+          while (1) {
+            switch (_context3.prev = _context3.next) {
+              case 0:
+                console.log("クリア開始");
+                console.log(id);
+                _context3.next = 4;
+                return axios.post("/api/clear/".concat(id));
+
+              case 4:
+                response = _context3.sent;
+                console.log(response.data);
+
+                if (!(response.status !== _util__WEBPACK_IMPORTED_MODULE_1__["OK"])) {
+                  _context3.next = 9;
+                  break;
+                }
+
+                _this4.$store.commit("error/setCode", response.status);
+
+                return _context3.abrupt("return", false);
+
+              case 9:
+                console.log("次の子STEPへ遷移開始");
+                _this4.page = _this4.nextPage;
+
+                _this4.scrollTop();
+
+              case 12:
+              case "end":
+                return _context3.stop();
+            }
+          }
+        }, _callee3);
       }))();
     },
     onPrev: function onPrev() {
@@ -2338,10 +2370,10 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       this.scrollTop();
     },
     scrollTop: function scrollTop() {
-      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee3() {
-        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee3$(_context3) {
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee4() {
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee4$(_context4) {
           while (1) {
-            switch (_context3.prev = _context3.next) {
+            switch (_context4.prev = _context4.next) {
               case 0:
                 window.scrollTo({
                   top: 0,
@@ -2350,19 +2382,19 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
               case 1:
               case "end":
-                return _context3.stop();
+                return _context4.stop();
             }
           }
-        }, _callee3);
+        }, _callee4);
       }))();
     },
     // Twitterシェア
     twitterShare: function twitterShare() {
-      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee4() {
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee5() {
         var shareURL;
-        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee4$(_context4) {
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee5$(_context5) {
           while (1) {
-            switch (_context4.prev = _context4.next) {
+            switch (_context5.prev = _context5.next) {
               case 0:
                 //シェアする画面を設定
                 shareURL = "https://twitter.com/intent/tweet?text=" + "あなたに合った学習方法が見つかるかも？「STEP」" + "%20%23STEP" + "&url=" + "https://gentle-basin-84705.herokuapp.com/top"; //シェア用の画面へ移行
@@ -2371,32 +2403,32 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
               case 2:
               case "end":
-                return _context4.stop();
+                return _context5.stop();
             }
           }
-        }, _callee4);
+        }, _callee5);
       }))();
     }
   },
   watch: {
     $route: {
       handler: function handler() {
-        var _this4 = this;
+        var _this5 = this;
 
-        return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee5() {
-          return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee5$(_context5) {
+        return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee6() {
+          return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee6$(_context6) {
             while (1) {
-              switch (_context5.prev = _context5.next) {
+              switch (_context6.prev = _context6.next) {
                 case 0:
-                  _context5.next = 2;
-                  return _this4.fetchChildStep();
+                  _context6.next = 2;
+                  return _this5.fetchChildStep();
 
                 case 2:
                 case "end":
-                  return _context5.stop();
+                  return _context6.stop();
               }
             }
-          }, _callee5);
+          }, _callee6);
         }))();
       },
       immediate: true
@@ -7498,10 +7530,11 @@ var render = function() {
               "button",
               {
                 staticClass: "c-btnEntry c-btn p-clearBtn",
+                class: { "p-clearBtn--gray": _vm.clearFlg },
                 attrs: { type: "submit" },
                 on: {
                   click: function($event) {
-                    return _vm.clear(item.id)
+                    return _vm.onClearClick(item.id)
                   }
                 }
               },
@@ -10221,7 +10254,7 @@ var staticRenderFns = [
         _c("p", { staticClass: "p-dataWrap__text" }, [
           _vm._v("\n        ある統計データでは、中学生の学習上での悩みの"),
           _c("br", { staticClass: "p-dataWrap__text--none" }),
-          _vm._v("半分以上はh上手な勉強のやり方がわからないと回答。\n      ")
+          _vm._v("半分以上は上手な勉強のやり方がわからないと回答。\n      ")
         ]),
         _vm._v(" "),
         _c("img", {

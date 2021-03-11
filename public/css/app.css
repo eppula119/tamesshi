@@ -2684,6 +2684,11 @@ button:not(:disabled) {
   transition: box-shadow 0.06s;
 }
 
+.p-childContainer .p-clearBtn--gray {
+  background-color: #C9D0D6;
+  color: white;
+}
+
 .p-childContainer .p-clearBtn:hover {
   background-color: white;
   color: #91ced9;

@@ -67,6 +67,10 @@
     outline: none;
     transition:box-shadow 0.06s;
   }
+  .p-clearBtn--gray {
+    background-color: $color_dark050;
+    color: $color_light100;
+  }
   .p-clearBtn:hover {
     background-color: $color_light100;
     color: $color_main;

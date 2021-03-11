@@ -26,7 +26,8 @@
         <button
           type="submit"
           class="c-btnEntry c-btn p-clearBtn"
-          @click="clear(item.id)"
+          :class="{ 'p-clearBtn--gray': clearFlg }"
+          @click="onClearClick(item.id)"
         >
           クリア
         </button>
@@ -113,6 +114,18 @@ export default {
       console.log("トータルページ");
       this.totalPage = Math.ceil(this.childs.length / this.perPage);
       console.log(this.totalPage);
+    },
+    // クリアー or クリア前に戻す
+    async onClearClick(id) {
+      if (this.childs.cleard) {
+        this.favFlg = false;
+        this.unfavorite();
+        console.log("いいね！");
+      } else {
+        this.favFlg = true;
+        this.favorite();
+        console.log("いいね削除");
+      }
     },
     // クリア
     async clear(id) {

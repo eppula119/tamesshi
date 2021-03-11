@@ -58,7 +58,7 @@ class StepController extends Controller
     public function showChild($id) // 子STEP詳細画面表示
     {
         Log::debug('子STEP詳細取得開始');
-        $child = ChildStep::where('step_id', $id)->with(['step'])->orderBy('created_at', 'asc')->get();
+        $child = ChildStep::where('step_id', $id)->with(['step','cleared'])->orderBy('created_at', 'asc')->get();
         Log::debug("ChildStep::where(step_id')のなかみ");
         Log::debug($child);
 
